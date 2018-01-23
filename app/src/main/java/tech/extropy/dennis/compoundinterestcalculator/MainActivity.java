@@ -1,0 +1,184 @@
+package tech.extropy.dennis.compoundinterestcalculator;
+
+import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.text.DecimalFormat;
+
+public class MainActivity extends Activity { //extends AppCompatActivity {
+    private static final String TAG = "MyActivity";
+    TextView mYearsGrow;
+    TextView mInterestRate;
+    TextView mCurrentPrinciple;
+    TextView mAnnualAddition;
+    TextView mNumberOfTimesCompounded;
+    EditText mYearsGrowInput;
+    EditText mInterestRateInput;
+    EditText mCurrentPrincipleInput;
+    EditText mAnnualAdditionInput;
+    EditText mNumberOfTimesCompoundedInput;
+    EditText mResult;
+    Button mCalculate;
+    Button mSave;
+    TextView mTotal;
+    RadioGroup mRadioGroup;
+    FinanceMath finance;
+    int yearsToGrow;
+    double interestRate;
+    double currentPrinciple;
+    double annualAddition;
+    double total;
+    int numberOfTimesCompounded;
+    int startOrEnd;
+    String strInput;
+    private DecimalFormat df2;
+    Intent intent;
+    Bundle bd;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mYearsGrow = (TextView) findViewById(R.id.yearGrow);
+        mInterestRate = (TextView) findViewById(R.id.interestRate);
+        mCurrentPrinciple = (TextView) findViewById(R.id.currentPrinciple);
+        mAnnualAddition = (TextView) findViewById(R.id.annualAddition);
+        mNumberOfTimesCompounded = (TextView) findViewById(R.id.numberOfTimesCompounded);
+        mYearsGrowInput = (EditText) findViewById(R.id.yearGrowInput);
+        mInterestRateInput = (EditText) findViewById(R.id.interestRateInput);
+        mCurrentPrincipleInput = (EditText) findViewById(R.id.currentPrincipleInput);
+        mAnnualAdditionInput = (EditText) findViewById(R.id.annualAdditionInput);
+        mNumberOfTimesCompoundedInput = (EditText) findViewById(R.id.numberOfTimesCompoundedInput);
+        mResult = (EditText) findViewById(R.id.editTextResult);
+        mCalculate = (Button) findViewById(R.id.calculate);
+        mSave = (Button) findViewById(R.id.save);
+        mTotal = (TextView) findViewById(R.id.total);
+        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        df2 = new DecimalFormat(".##");
+        finance = new FinanceMath();
+        intent = getIntent();
+        bd = intent.getExtras();
+
+
+        final Context context = getApplicationContext();
+        final Context context1 = this;
+        CharSequence text = "Hello toast!";
+        int duration = Toast.LENGTH_SHORT;
+
+        if(mYearsGrowInput.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.endRadioButton) {
+                    startOrEnd = 1;
+                } else {
+                    startOrEnd = 2;
+                }
+            }
+        });
+
+
+
+
+        mNumberOfTimesCompoundedInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+                    strInput = mNumberOfTimesCompoundedInput.getText().toString();
+                    numberOfTimesCompounded = Integer.parseInt(strInput);
+                }
+                return false;
+            }
+        });
+
+        mCalculate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                strInput = mYearsGrowInput.getText().toString();
+                yearsToGrow = Integer.parseInt(strInput);
+                strInput = mInterestRateInput.getText().toString();
+                interestRate = Double.parseDouble(strInput);
+                interestRate = interestRate*.01;
+                strInput = mCurrentPrincipleInput.getText().toString();
+                currentPrinciple = Double.parseDouble(strInput);
+                strInput = mAnnualAdditionInput.getText().toString();
+                annualAddition = Integer.parseInt(strInput);
+
+                if(startOrEnd == 1) {
+                    total = finance.compoundInterestAnnualAdditionEnd(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
+                } else {
+                    total = finance.compoundInterestAnnualAdditionBeginning(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
+                }
+
+                Log.d("Test","Total amount: "+df2.format(total));
+                mTotal.setText("Total: "+"$"+df2.format(total));
+            }
+        });
+
+// add button listener
+        mSave.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(context1);
+                View promptsView = li.inflate(R.layout.custom, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.editTextDialogUserInput);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        mResult.setText(userInput.getText());
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+            }
+        });
+    }
+}

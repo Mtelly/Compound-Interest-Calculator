@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/yearGrow"
+        android:labelFor="@+id/yearGrowInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/interestRateInput"
+        android:layout_alignParentStart="true"
+        android:text="@string/years_grow" />
+
+    <EditText
+        android:id="@+id/yearGrowInput"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/interestRateInput"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="numberSigned">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/interestRate"
+        android:labelFor="@+id/interestRateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/interestRateInput"
+        android:layout_alignParentStart="true"
+        android:text="@string/interest_rate" />
+
+
+    <EditText
+        android:id="@+id/interestRateInput"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/currentPrincipleInput"
+        android:layout_below="@+id/yearGrowInput"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/currentPrinciple"
+        android:labelFor="@id/currentPrincipleInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/interestRate"
+        android:layout_marginTop="33dp"
+        android:text="@string/current_principle" />
+
+    <EditText
+        android:id="@+id/currentPrincipleInput"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/currentPrinciple"
+        android:layout_marginStart="22dp"
+        android:layout_toEndOf="@+id/currentPrinciple"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/annualAddition"
+        android:labelFor="@id/annualAdditionInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/currentPrinciple"
+        android:layout_marginTop="31dp"
+        android:text="@string/annual_addition" />
+
+    <EditText
+        android:id="@+id/annualAdditionInput"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/annualAddition"
+        android:layout_alignEnd="@+id/currentPrincipleInput"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/numberOfTimesCompounded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/annualAddition"
+        android:layout_marginTop="14dp"
+        android:layout_toStartOf="@+id/annualAdditionInput"
+        android:maxLines="3"
+        android:minLines="3"
+        android:text="@string/annual_compound" />
+
+    <EditText
+        android:id="@+id/numberOfTimesCompoundedInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/numberOfTimesCompounded"
+        android:layout_toEndOf="@+id/numberOfTimesCompounded"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="numberSigned"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/compound_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_alignParentStart="true"
+        android:text="@string/compoundInterest_end" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="110dp"
+        android:paddingTop="285dp">
+
+        <RadioButton
+            android:id="@+id/endRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end" />
+
+        <RadioButton
+            android:id="@+id/startRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/end_sentence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_alignParentEnd="@+id/compound_end"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:text="@string/compoundInterest_begin" />
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/compound_end"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/end_sentence"
+        android:text="@string/calculate" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calculate"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/numberOfTimesCompounded"
+        android:text="@string/total" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/compound_end"
+        android:layout_toEndOf="@+id/calculate"
+        android:text="@string/save" />
+
+</RelativeLayout>

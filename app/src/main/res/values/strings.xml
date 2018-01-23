@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Compound Interest Calculator</string>
+    <string name="years_grow">Years to grow</string>
+    <string name="interest_rate">Interest Rate</string>
+    <string name="current_principle">Current Principle</string>
+    <string name="annual_addition">Annual Addition</string>
+    <string name="annual_compound">Number of times
+        compounded annually</string>
+    <string name="calculate">Calculate</string>
+    <string name="total">Total:</string>
+    <string name="compoundInterest_end">Make additions to</string>
+    <string name="end">end</string>
+    <string name="start">start</string>
+    <string name="compoundInterest_begin"> of compounding period.</string>
+
+    <string name="compoundInterestWithAnnualAdd">Compound interest with annual additions</string>
+    <string name="annual_comp_int">Annual Compound Interest</string>
+    <string name="simple_interest">Simple Interest Calculator</string>
+    <string name="continuously_compound">Continuously Compounded Interest</string>
+
+    <string name="continue_next">Continue</string>
+    <string name="load">Load File</string>
+    <string name="deletion">Delete File</string>
+    <string name="save">Save File</string>
+
+</resources>
