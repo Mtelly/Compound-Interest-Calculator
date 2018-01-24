@@ -50,6 +50,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
     int startOrEnd;
     String strInput;
     private DecimalFormat df2;
+    boolean checkValidation;
     Intent intent;
     Bundle bd;
 
@@ -77,6 +78,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         finance = new FinanceMath();
         intent = getIntent();
         bd = intent.getExtras();
+        checkValidation = false;
 
 
         final Context context = getApplicationContext();
@@ -106,8 +108,14 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+
                     strInput = mNumberOfTimesCompoundedInput.getText().toString();
-                    numberOfTimesCompounded = Integer.parseInt(strInput);
+                    checkValidation = isEmpty(strInput);
+                    if(checkValidation){
+                        mNumberOfTimesCompoundedInput.setError("Input must not be empty.");
+                    } else {
+                        numberOfTimesCompounded = Integer.parseInt(strInput);
+                    }
                 }
                 return false;
             }
@@ -115,24 +123,47 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                strInput = mYearsGrowInput.getText().toString();
-                yearsToGrow = Integer.parseInt(strInput);
-                strInput = mInterestRateInput.getText().toString();
-                interestRate = Double.parseDouble(strInput);
-                interestRate = interestRate*.01;
-                strInput = mCurrentPrincipleInput.getText().toString();
-                currentPrinciple = Double.parseDouble(strInput);
-                strInput = mAnnualAdditionInput.getText().toString();
-                annualAddition = Integer.parseInt(strInput);
 
-                if(startOrEnd == 1) {
-                    total = finance.compoundInterestAnnualAdditionEnd(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
-                } else {
-                    total = finance.compoundInterestAnnualAdditionBeginning(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
+                        strInput = mYearsGrowInput.getText().toString();
+                        checkValidation = isEmpty(strInput);
+                        if(checkValidation){
+                            mYearsGrowInput.setError("Input must not be empty.");
+                        } else {
+                            yearsToGrow = Integer.parseInt(strInput);
+                        }
+                        strInput = mInterestRateInput.getText().toString();
+                        checkValidation = isEmpty(strInput);
+                        if(checkValidation){
+                            mInterestRateInput.setError("Input must not be empty.");
+                        } else {
+                            interestRate = Double.parseDouble(strInput);
+                            interestRate = interestRate * .01;
+                        }
+                        strInput = mCurrentPrincipleInput.getText().toString();
+                        checkValidation = isEmpty(strInput);
+                        if(checkValidation){
+                            mCurrentPrincipleInput.setError("Input must not be empty.");
+                        } else {
+                            currentPrinciple = Double.parseDouble(strInput);
+                        }
+                        strInput = mAnnualAdditionInput.getText().toString();
+                        checkValidation = isEmpty(strInput);
+                        if(checkValidation){
+                            mAnnualAdditionInput.setError("Input must not be empty.");
+                        } else {
+                            annualAddition = Integer.parseInt(strInput);
+                        }
+
+                if(checkValidation != true) {
+                    if (startOrEnd == 1) {
+                        total = finance.compoundInterestAnnualAdditionEnd(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
+                    } else {
+                        total = finance.compoundInterestAnnualAdditionBeginning(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
+                    }
+
+                    Log.d("Test", "Total amount: " + df2.format(total));
+                    mTotal.setText("Total: " + "$" + df2.format(total));
                 }
-
-                Log.d("Test","Total amount: "+df2.format(total));
-                mTotal.setText("Total: "+"$"+df2.format(total));
             }
         });
 
@@ -162,7 +193,10 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        mResult.setText(userInput.getText());
+                                        String test = userInput.getText().toString();
+                                        Log.d("Test :",test);
+                                        //mResult.setText(test);
+
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -181,4 +215,15 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
             }
         });
     }
+
+    public boolean isEmpty(String strInput){
+
+        if(strInput.isEmpty() || (0 == strInput.compareTo(" "))) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

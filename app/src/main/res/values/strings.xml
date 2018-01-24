@@ -23,4 +23,6 @@
     <string name="deletion">Delete File</string>
     <string name="save">Save File</string>
 
+    <string name="file_name">File Name</string>
+
 </resources>
