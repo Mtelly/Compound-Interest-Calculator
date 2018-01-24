@@ -36,6 +36,7 @@ public class AnnualCompoundInterest extends AppCompatActivity {
     double interestRate;
     double currentPrinciple;
     double total;
+    boolean checkValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,9 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         df2 = new DecimalFormat(".##");
         mCalculate = (Button) findViewById(R.id.calculate);
         finance = new FinanceMath();
+        checkValidation = false;
 
+        mTotal.setText("Total: $0.00");
         Context context = getApplicationContext();
         CharSequence text = "Hello toast!";
         int duration = Toast.LENGTH_SHORT;
@@ -66,8 +69,14 @@ public class AnnualCompoundInterest extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+                    checkValidation = false;
                     strInput = mNumberOfTimesCompoundedInput.getText().toString();
-                    numberOfTimesCompoundedCompute = Integer.parseInt(strInput);
+                    if(isEmpty(strInput)){
+                        mNumberOfTimesCompoundedInput.setError("Input must not be empty.");
+                        checkValidation = true;
+                    } else {
+                        numberOfTimesCompoundedCompute = Integer.parseInt(strInput);
+                    }
                 }
                 return false;
             }
@@ -75,18 +84,55 @@ public class AnnualCompoundInterest extends AppCompatActivity {
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                strInput = mYearGrowInput.getText().toString();
-                yearsToGrow = Integer.parseInt(strInput);
-                strInput = mInterestRateInput.getText().toString();
-                interestRate = Double.parseDouble(strInput);
-                interestRate = interestRate *.01;
-                strInput = mCurrentPrincipleInput.getText().toString();
-                currentPrinciple = Double.parseDouble(strInput);
-                strInput = mNumberOfTimesCompoundedInput.getText().toString();
 
-                total = finance.annualCompoundInterest(currentPrinciple, interestRate, yearsToGrow, numberOfTimesCompoundedCompute);
-                Log.d("Total :", ""+total);
-                mTotal.setText("Total: "+"$"+df2.format(total));
+                checkValidation = false;
+                strInput = mYearGrowInput.getText().toString();
+                if(isEmpty(strInput)) {
+                    mYearGrowInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    yearsToGrow = Integer.parseInt(strInput);
+                }
+                strInput = mInterestRateInput.getText().toString();
+                if(isEmpty(strInput)) {
+                    mInterestRateInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    interestRate = Double.parseDouble(strInput);
+                    interestRate = interestRate * .01;
+                }
+                strInput = mCurrentPrincipleInput.getText().toString();
+                if(isEmpty(strInput)){
+                    mCurrentPrincipleInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    currentPrinciple = Double.parseDouble(strInput);
+                }
+                strInput = mNumberOfTimesCompoundedInput.getText().toString();
+                if(isEmpty(mNumberOfTimesCompoundedInput.getText().toString())){
+                    mNumberOfTimesCompoundedInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    numberOfTimesCompoundedCompute = Integer.parseInt(strInput);
+                }
+
+                //strInput = mNumberOfTimesCompoundedInput.getText().toString();
+                if(checkValidation != true) {
+                    total = finance.annualCompoundInterest(currentPrinciple, interestRate, yearsToGrow, numberOfTimesCompoundedCompute);
+                    Log.d("Total :", "" + total);
+                    mTotal.setText("Total: " + "$" + df2.format(total));
+                }
+
             }});
+    }
+
+    public boolean isEmpty(String strInput){
+
+        if(strInput.isEmpty() || (0 == strInput.compareTo(" "))) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

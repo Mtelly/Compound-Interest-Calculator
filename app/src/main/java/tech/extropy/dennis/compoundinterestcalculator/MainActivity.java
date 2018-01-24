@@ -80,7 +80,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         bd = intent.getExtras();
         checkValidation = false;
 
-
+        mTotal.setText("Total: $0.00");
         final Context context = getApplicationContext();
         final Context context1 = this;
         CharSequence text = "Hello toast!";
@@ -108,11 +108,11 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
-
+                    checkValidation = false;
                     strInput = mNumberOfTimesCompoundedInput.getText().toString();
-                    checkValidation = isEmpty(strInput);
-                    if(checkValidation){
+                    if(isEmpty(strInput)) {
                         mNumberOfTimesCompoundedInput.setError("Input must not be empty.");
+                        checkValidation = true;
                     } else {
                         numberOfTimesCompounded = Integer.parseInt(strInput);
                     }
@@ -124,34 +124,42 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                        checkValidation = false;
                         strInput = mYearsGrowInput.getText().toString();
-                        checkValidation = isEmpty(strInput);
-                        if(checkValidation){
+                        if(isEmpty(strInput)){
                             mYearsGrowInput.setError("Input must not be empty.");
+                            checkValidation = true;
                         } else {
                             yearsToGrow = Integer.parseInt(strInput);
                         }
                         strInput = mInterestRateInput.getText().toString();
-                        checkValidation = isEmpty(strInput);
-                        if(checkValidation){
+                        if(isEmpty(strInput)){
                             mInterestRateInput.setError("Input must not be empty.");
+                            checkValidation = true;
                         } else {
                             interestRate = Double.parseDouble(strInput);
                             interestRate = interestRate * .01;
                         }
                         strInput = mCurrentPrincipleInput.getText().toString();
-                        checkValidation = isEmpty(strInput);
-                        if(checkValidation){
+                        if(isEmpty(strInput)){
                             mCurrentPrincipleInput.setError("Input must not be empty.");
+                            checkValidation = true;
                         } else {
                             currentPrinciple = Double.parseDouble(strInput);
                         }
                         strInput = mAnnualAdditionInput.getText().toString();
-                        checkValidation = isEmpty(strInput);
-                        if(checkValidation){
+                        if(isEmpty(strInput)){
                             mAnnualAdditionInput.setError("Input must not be empty.");
+                            checkValidation = true;
                         } else {
                             annualAddition = Integer.parseInt(strInput);
+                        }
+                        strInput = mNumberOfTimesCompoundedInput.getText().toString();
+                        if(isEmpty(mNumberOfTimesCompoundedInput.getText().toString())){
+                            mNumberOfTimesCompoundedInput.setError("Input must not be empty.");
+                            checkValidation = true;
+                        } else {
+                            numberOfTimesCompounded = Integer.parseInt(strInput);
                         }
 
                 if(checkValidation != true) {

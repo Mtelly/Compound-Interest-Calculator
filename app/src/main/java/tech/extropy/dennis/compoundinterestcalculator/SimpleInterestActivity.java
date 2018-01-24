@@ -32,6 +32,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
     double interestRate;
     double currentPrinciple;
     double total;
+    boolean checkValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class SimpleInterestActivity extends AppCompatActivity {
         df2 = new DecimalFormat(".##");
         mCalculate = (Button) findViewById(R.id.calculate);
         finance = new FinanceMath();
+        checkValidation = false;
 
+        mTotal.setText("Total: $0.00");
         if(mYearGrowInput.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
@@ -56,9 +59,15 @@ public class SimpleInterestActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+                    checkValidation = false;
                     strInput = mCurrentPrincipleInput.getText().toString();
-                    currentPrinciple = Double.parseDouble(strInput);
-                    Log.d("strInput :",""+strInput);
+                    if(isEmpty(strInput)){
+                        mCurrentPrincipleInput.setError("Input must not be empty.");
+                        checkValidation = true;
+                    } else {
+                        currentPrinciple = Double.parseDouble(strInput);
+                        Log.d("strInput :", "" + strInput);
+                    }
                 }
                 return false;
             }
@@ -66,16 +75,46 @@ public class SimpleInterestActivity extends AppCompatActivity {
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                checkValidation = false;
                 strInput = mYearGrowInput.getText().toString();
-                yearsToGrow = Integer.parseInt(strInput);
-                strInput = mInterestRateInput.getText().toString();
-                interestRate = Double.parseDouble(strInput);
-                interestRate = interestRate *.01;
-                Log.d("All vars   :","currentPrinciple :"+currentPrinciple+"interestRate :"+interestRate+"yearsToGrow :"+yearsToGrow);
+                if(isEmpty(strInput)) {
+                    mYearGrowInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    yearsToGrow = Integer.parseInt(strInput);
+                }
 
-                total = finance.continuousInterest(currentPrinciple, interestRate, yearsToGrow);
-                Log.d("Total :", ""+total);
-                mTotal.setText("Total: "+"$"+df2.format(total));
+                strInput = mInterestRateInput.getText().toString();
+                if(isEmpty(strInput)){
+                    mInterestRateInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    interestRate = Double.parseDouble(strInput);
+                    interestRate = interestRate * .01;
+                }
+
+                strInput = mCurrentPrincipleInput.getText().toString();
+                if(isEmpty(strInput)){
+                    mCurrentPrincipleInput.setError("Input must not be empty.");
+                    checkValidation = true;
+                } else {
+                    currentPrinciple = Double.parseDouble(strInput);
+                }
+
+                if(checkValidation != true) {
+                    Log.d("All vars   :", "currentPrinciple :" + currentPrinciple + "interestRate :" + interestRate + "yearsToGrow :" + yearsToGrow);
+                    total = finance.continuousInterest(currentPrinciple, interestRate, yearsToGrow);
+                    Log.d("Total :", "" + total);
+                    mTotal.setText("Total: " + "$" + df2.format(total));
+                }
             }});
+    }
+
+    public boolean isEmpty(String strInput){
+        if(strInput.isEmpty() || (0 == strInput.compareTo(" "))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
