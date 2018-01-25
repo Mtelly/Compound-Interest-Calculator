@@ -14,13 +14,14 @@ public class FinanceMath implements Serializable {
     private int time;
     private int compoundingPeriods;
     private double annualAddition;
-
+    private int formulaType;
 
     public double continuousInterest(double principle, double interestRate, int time) {
 
         this.principle = principle;
         this.interestRate = interestRate;
         this.time = time;
+        formulaType = 3;
 
         //A = P*e^(r*t)
         double amount = principle*Math.exp(interestRate*time);
@@ -33,6 +34,7 @@ public class FinanceMath implements Serializable {
         this.principle = principle;
         this.interestRate = interestRate;
         this.time = time;
+        formulaType = 2;
 
         //A = P(1 + rt)
         double amount = principle*(1+interestRate*time);
@@ -46,6 +48,7 @@ public class FinanceMath implements Serializable {
         this.interestRate = interestRate;
         this.time = time;
         this.compoundingPeriods = compoundingPeriods;
+        formulaType = 1;
 
         //A=P(1+(r/n))^(n*t)
         double total = Math.pow((1 + (interestRate/compoundingPeriods)), (compoundingPeriods*time));
@@ -63,6 +66,7 @@ public class FinanceMath implements Serializable {
         this.principle = principle;
         this.annualAddition = annualAddition;
         this.compoundingPeriods = compoundingPeriods;
+        formulaType = 4;
 
         //[ P(1+r/n)^(nt) ] + [ PMT × (((1 + r/n)^(nt) - 1) / (r/n)) ]
         //[ P(1+r/n)^(nt) ]
@@ -91,6 +95,7 @@ public class FinanceMath implements Serializable {
         this.principle = principle;
         this.annualAddition = annualAddition;
         this.compoundingPeriods = compoundingPeriods;
+        formulaType = 0;
 
         //[ P(1+r/n)^(nt) ] + [ PMT × (((1 + r/n)^(nt) - 1) / (r/n)) ] × (1+r/n)
         //[ P(1+r/n)^(nt) ]

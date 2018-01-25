@@ -2,6 +2,7 @@ package tech.extropy.dennis.compoundinterestcalculator;
 
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
 
+import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
     boolean checkValidation;
     Intent intent;
     Bundle bd;
+    DatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         intent = getIntent();
         bd = intent.getExtras();
         checkValidation = false;
+        mDatabaseHelper = new DatabaseHelper(this);
 
         mTotal.setText("Total: $0.00");
         final Context context = getApplicationContext();
@@ -202,6 +205,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         // get user input and set it to result
                                         // edit text
                                         String test = userInput.getText().toString();
+                                        
                                         Log.d("Test :",test);
                                         //mResult.setText(test);
 
