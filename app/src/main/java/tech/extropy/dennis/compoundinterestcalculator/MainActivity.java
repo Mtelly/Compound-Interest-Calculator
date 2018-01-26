@@ -202,6 +202,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
+
                                         // get user input and set it to result
                                         // edit text
                                         String test = userInput.getText().toString();
@@ -215,6 +216,10 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         }
 
                                         //mResult.setText(test);
+
+                                        //View list of data
+                                        Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
+                                        startActivity(intent);
 
                                     }
                                 })
