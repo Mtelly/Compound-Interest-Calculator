@@ -205,8 +205,15 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         // get user input and set it to result
                                         // edit text
                                         String test = userInput.getText().toString();
-                                        
-                                        Log.d("Test :",test);
+
+                                        String newEntry = userInput.getText().toString();
+                                        if (userInput.length() != 0) {
+                                            AddData(newEntry);
+                                            userInput.setText("");
+                                        } else {
+                                            toastMessage("You must put something in the text field!");
+                                        }
+
                                         //mResult.setText(test);
 
                                     }
@@ -226,6 +233,26 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    public void AddData(String newEntry) {
+        boolean insertData = mDatabaseHelper.addData(newEntry);
+
+        if (insertData) {
+            toastMessage("Data Successfully Inserted!");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
     public boolean isEmpty(String strInput){
