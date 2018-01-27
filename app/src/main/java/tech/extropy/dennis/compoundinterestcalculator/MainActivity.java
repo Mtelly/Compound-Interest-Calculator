@@ -104,9 +104,6 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
             }
         });
 
-
-
-
         mNumberOfTimesCompoundedInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
