@@ -205,22 +205,20 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
                                         // get user input and set it to result
                                         // edit text
-                                        String test = userInput.getText().toString();
+                                        //String test = userInput.getText().toString();
 
                                         String newEntry = userInput.getText().toString();
                                         if (userInput.length() != 0) {
                                             AddData(newEntry);
                                             userInput.setText("");
+                                            //View list of data
+                                            Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
+                                            startActivity(intent);
                                         } else {
                                             toastMessage("You must put something in the text field!");
                                         }
 
                                         //mResult.setText(test);
-
-                                        //View list of data
-                                        Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
-                                        startActivity(intent);
-
                                     }
                                 })
                         .setNegativeButton("Cancel",
