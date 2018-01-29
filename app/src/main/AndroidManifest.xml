@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListDataActivity"></activity>
+        <activity android:name=".EditDataActivity"/>
         <activity android:name=".AnnualCompoundInterest" />
         <activity android:name=".SimpleInterestActivity" />
         <activity android:name=".ContinuouslyCompoundedActivity"/>
