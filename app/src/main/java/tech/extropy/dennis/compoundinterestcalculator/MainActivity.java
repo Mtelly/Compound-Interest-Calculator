@@ -26,29 +26,16 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends Activity { //extends AppCompatActivity {
     private static final String TAG = "MyActivity";
-    TextView mYearsGrow;
-    TextView mInterestRate;
-    TextView mCurrentPrinciple;
-    TextView mAnnualAddition;
-    TextView mNumberOfTimesCompounded;
-    EditText mYearsGrowInput;
-    EditText mInterestRateInput;
-    EditText mCurrentPrincipleInput;
-    EditText mAnnualAdditionInput;
-    EditText mNumberOfTimesCompoundedInput;
-    EditText mResult;
-    Button mCalculate;
-    Button mSave;
-    TextView mTotal;
+    TextView mYearsGrow, mInterestRate, mCurrentPrinciple, mAnnualAddition,
+            mNumberOfTimesCompounded, mTotal;
+    EditText mYearsGrowInput, mInterestRateInput, mCurrentPrincipleInput,
+            mAnnualAdditionInput, mNumberOfTimesCompoundedInput, mResult;
+    Button mCalculate, mSave;
     RadioGroup mRadioGroup;
     FinanceMath finance;
     int yearsToGrow;
-    double interestRate;
-    double currentPrinciple;
-    double annualAddition;
-    double total;
-    int numberOfTimesCompounded;
-    int startOrEnd;
+    double interestRate, currentPrinciple, annualAddition, total;
+    int numberOfTimesCompounded, startOrEnd;
     String strInput;
     private DecimalFormat df2;
     boolean checkValidation;
