@@ -1,14 +1,19 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,6 +33,7 @@ public class ListDataActivity extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
 
     private ListView mListView;
+    final Context context1 = this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +73,8 @@ public class ListDataActivity extends AppCompatActivity {
                 while(data.moveToNext()){
                     itemID = data.getInt(0);
                 }
+                displayWindow();
+                /*
                 if(itemID > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + itemID);
                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
@@ -77,8 +85,62 @@ public class ListDataActivity extends AppCompatActivity {
                 else{
                     toastMessage("No ID associated with that name");
                 }
+                */
             }
         });
+    }
+
+    public void displayWindow(){
+// get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(context1);
+        View promptsView = li.inflate(R.layout.custom, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                // get user input and set it to result
+                                // edit text
+                                //String test = userInput.getText().toString();
+
+                                String newEntry = userInput.getText().toString();
+                                if (userInput.length() != 0) {
+                                    //AddData(newEntry);
+                                    userInput.setText("");
+                                    //View list of data
+                                    Intent intent = new Intent(ListDataActivity.this, ListDataActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    toastMessage("You must put something in the text field!");
+                                }
+
+                                //mResult.setText(test);
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
     }
 
     /**
