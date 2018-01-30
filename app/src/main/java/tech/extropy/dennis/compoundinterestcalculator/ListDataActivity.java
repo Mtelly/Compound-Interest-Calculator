@@ -73,7 +73,7 @@ public class ListDataActivity extends AppCompatActivity {
                 while(data.moveToNext()){
                     itemID = data.getInt(0);
                 }
-                displayWindow();
+                displayWindow(name, itemID);
                 /*
                 if(itemID > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + itemID);
@@ -90,10 +90,11 @@ public class ListDataActivity extends AppCompatActivity {
         });
     }
 
-    public void displayWindow(){
+    public void displayWindow(String name, int itemID){
 // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(context1);
         View promptsView = li.inflate(R.layout.custom2, null);
+        
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
         Log.d("DialogInterface.", "DIALOG");
@@ -104,13 +105,22 @@ public class ListDataActivity extends AppCompatActivity {
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
 
-
         // set dialog message
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
+                                if(itemID > -1){
+                                    Log.d(TAG, "onItemClick: The ID is: " + itemID);
+                                    Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
+                                    editScreenIntent.putExtra("id",itemID);
+                                    editScreenIntent.putExtra("name",name);
+                                    startActivity(editScreenIntent);
+                                }
+                                else{
+                                    toastMessage("No ID associated with that name");
+                                }
                                 // get user input and set it to result
                                 // edit text
                                 //String test = userInput.getText().toString();
