@@ -93,9 +93,10 @@ public class ListDataActivity extends AppCompatActivity {
     public void displayWindow(){
 // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(context1);
-        View promptsView = li.inflate(R.layout.custom, null);
+        View promptsView = li.inflate(R.layout.custom2, null);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
+        Log.d("DialogInterface.", "DIALOG");
 
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
@@ -103,17 +104,16 @@ public class ListDataActivity extends AppCompatActivity {
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
 
+
         // set dialog message
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("OK",
+                .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-
                                 // get user input and set it to result
                                 // edit text
-                                //String test = userInput.getText().toString();
-
+                                String test = userInput.getText().toString();
                                 String newEntry = userInput.getText().toString();
                                 if (userInput.length() != 0) {
                                     //AddData(newEntry);
@@ -124,11 +124,10 @@ public class ListDataActivity extends AppCompatActivity {
                                 } else {
                                     toastMessage("You must put something in the text field!");
                                 }
-
                                 //mResult.setText(test);
                             }
                         })
-                .setNegativeButton("Cancel",
+                .setNegativeButton("Load",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 dialog.cancel();

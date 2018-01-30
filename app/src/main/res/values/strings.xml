@@ -24,5 +24,6 @@
     <string name="save">Save File</string>
 
     <string name="file_name">File Name</string>
+    <string name="choice">Select A Choice:</string>
 
 </resources>
