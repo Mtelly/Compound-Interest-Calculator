@@ -16,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
@@ -24,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
+        <activity android:name=".MainActivity"/>
         <activity android:name=".ListDataActivity"></activity>
         <activity android:name=".EditDataActivity"/>
         <activity android:name=".AnnualCompoundInterest" />

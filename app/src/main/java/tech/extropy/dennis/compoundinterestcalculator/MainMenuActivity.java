@@ -13,9 +13,7 @@ import android.widget.Toast;
 public class MainMenuActivity extends AppCompatActivity {
 
     RadioGroup radioGroup;
-    Button continueNext;
-    Button load;
-    Button delete;
+    Button continueNext, load;
     int formulaType;
 
     @Override
@@ -26,7 +24,8 @@ public class MainMenuActivity extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.calculateGroup);
         continueNext = (Button) findViewById(R.id.continue_next);
         load = (Button) findViewById(R.id.load);
-        delete = (Button) findViewById(R.id.delete);
+
+        radioGroup.clearCheck();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -51,6 +50,14 @@ public class MainMenuActivity extends AppCompatActivity {
                 startFormula(formulaType);
             }
         });
+
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formulaType = 999;
+                startFormula(formulaType);
+            }
+        });
     }
 
     private void startFormula(int formulaType) {
@@ -70,6 +77,11 @@ public class MainMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ContinuouslyCompoundedActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+        } else if(formulaType == 999) {
+            Intent intent = new Intent(this, ListDataActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+            finish();
         }
     }
 }

@@ -54,17 +54,9 @@
         android:id="@+id/load"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calculateGroup"
-        android:layout_toStartOf="@+id/delete"
-        android:text="@string/load" />
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/load"
         android:layout_alignEnd="@+id/calculateGroup"
-        android:text="@string/deletion" />
+        android:layout_below="@+id/calculateGroup"
+        android:text="@string/load" />
 
 
 </RelativeLayout>
