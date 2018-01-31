@@ -65,22 +65,27 @@ public class MainMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            finish();
         } else if(formulaType == 1){
             Intent intent = new Intent(this, AnnualCompoundInterest.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            finish();
         } else if(formulaType == 2){
             Intent intent = new Intent(this, SimpleInterestActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            finish();
         } else if(formulaType == 3){
             Intent intent = new Intent(this, ContinuouslyCompoundedActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            finish();
         } else if(formulaType == 999) {
             Intent intent = new Intent(this, ListDataActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            finish();
         }
     }
 }

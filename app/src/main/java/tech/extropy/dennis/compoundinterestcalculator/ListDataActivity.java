@@ -144,6 +144,7 @@ public class ListDataActivity extends AppCompatActivity {
                                     editScreenIntent.putExtra("id",itemID2);
                                     editScreenIntent.putExtra("name",name2);
                                     startActivity(editScreenIntent);
+                                    finish();
                                 }
                                 else{
                                     toastMessage("No ID associated with that name");
@@ -170,6 +171,7 @@ public class ListDataActivity extends AppCompatActivity {
                                 //View list of data
                                 Intent intent = new Intent(ListDataActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
 

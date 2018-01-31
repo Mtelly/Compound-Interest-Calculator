@@ -201,6 +201,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                             Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
                                             intent.putExtra("type", formulaType);
                                             startActivity(intent);
+                                            finish();
                                         } else {
                                             toastMessage("You must put something in the text field!");
                                         }
