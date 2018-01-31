@@ -32,11 +32,11 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.compoundInterestWithAnnualAdd) {
                     formulaType = 0;
-                } else if (checkedId == R.id.annual_comp_int){
+                } else if (checkedId == R.id.annual_comp_int) {
                     formulaType = 1;
-                } else if(checkedId == R.id.simple_interest){
+                } else if(checkedId == R.id.simple_interest) {
                     formulaType = 2;
-                } else if(checkedId == R.id.continuously_compound){
+                } else if(checkedId == R.id.continuously_compound) {
                     formulaType = 3;
                 } else {
                     formulaType = 4;

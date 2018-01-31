@@ -182,7 +182,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
                 // set dialog message
                 alertDialogBuilder
-                        .setCancelable(false)
+                        .setCancelable(true)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
@@ -190,6 +190,8 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         // get user input and set it to result
                                         // edit text
                                         //String test = userInput.getText().toString();
+                                        Intent test = getIntent();
+                                        int formulaType = test.getIntExtra("type", 9999);
 
                                         String newEntry = userInput.getText().toString();
                                         if (userInput.length() != 0) {
@@ -197,6 +199,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                             userInput.setText("");
                                             //View list of data
                                             Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
+                                            intent.putExtra("type", formulaType);
                                             startActivity(intent);
                                         } else {
                                             toastMessage("You must put something in the text field!");

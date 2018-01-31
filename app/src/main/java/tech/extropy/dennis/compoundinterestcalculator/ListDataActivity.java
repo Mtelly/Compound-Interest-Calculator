@@ -60,6 +60,14 @@ public class ListDataActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainMenuActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
+            Log.d("onBackPressed() :","FINISH()");
+            finish();
+        } else if(newActivity == 0) {
+            formulaType = 0;
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -126,7 +134,7 @@ public class ListDataActivity extends AppCompatActivity {
 
         // set dialog message
         alertDialogBuilder
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
