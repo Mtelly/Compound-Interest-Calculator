@@ -81,7 +81,6 @@ public class MainMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ListDataActivity.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
-            finish();
         }
     }
 }

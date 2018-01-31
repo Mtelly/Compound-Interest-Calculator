@@ -35,14 +35,32 @@ public class ListDataActivity extends AppCompatActivity {
     private ListView mListView;
     final Context context1 = this;
 
+    Intent intent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_layout);
         mListView = (ListView) findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
+        intent = getIntent();
 
         populateListView();
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        int newActivity = intent.getIntExtra("type",9999);
+        int formulaType;
+
+        if(newActivity == 999){
+            formulaType = 999;
+            Intent intent = new Intent(this, MainMenuActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+        }
     }
 
     private void populateListView() {
@@ -162,4 +180,5 @@ public class ListDataActivity extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
+
 }
