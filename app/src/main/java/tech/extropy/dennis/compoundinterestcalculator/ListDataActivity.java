@@ -94,7 +94,8 @@ public class ListDataActivity extends AppCompatActivity {
 // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(context1);
         View promptsView = li.inflate(R.layout.custom2, null);
-        
+        final String name2 = name;
+        final int itemID2 = itemID;
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
         Log.d("DialogInterface.", "DIALOG");
@@ -111,11 +112,11 @@ public class ListDataActivity extends AppCompatActivity {
                 .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                if(itemID > -1){
-                                    Log.d(TAG, "onItemClick: The ID is: " + itemID);
+                                if(itemID2 > -1){
+                                    Log.d(TAG, "onItemClick: The ID is: " + itemID2);
                                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
-                                    editScreenIntent.putExtra("id",itemID);
-                                    editScreenIntent.putExtra("name",name);
+                                    editScreenIntent.putExtra("id",itemID2);
+                                    editScreenIntent.putExtra("name",name2);
                                     startActivity(editScreenIntent);
                                 }
                                 else{
