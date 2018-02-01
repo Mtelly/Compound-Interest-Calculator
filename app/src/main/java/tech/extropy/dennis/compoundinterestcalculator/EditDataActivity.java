@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.List;
 
 import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
 
@@ -26,7 +29,7 @@ public class EditDataActivity extends AppCompatActivity {
 
     private String selectedName;
     private int selectedID;
-
+    Intent receivedIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class EditDataActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
 
         //get the intent extra from the ListDataActivity
-        Intent receivedIntent = getIntent();
+        receivedIntent = getIntent();
 
         //now get the itemID we passed as an extra
         selectedID = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
@@ -69,6 +72,34 @@ public class EditDataActivity extends AppCompatActivity {
                 toastMessage("removed from database");
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int newActivity = receivedIntent.getIntExtra("type",9999);
+        int formulaType;
+
+        if(newActivity == 999) {
+            formulaType = 999;
+            Intent intent = new Intent(this, MainMenuActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+            Log.d("onBackPressed() :","FINISH()");
+            finish();
+        } else if(newActivity == 0) {
+            formulaType = 0;
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+            finish();
+        } else if(newActivity == 10) {
+            formulaType = 10;
+            Intent intent = new Intent(this, ListDataActivity.class);
+            intent.putExtra("type", formulaType);
+            startActivity(intent);
+            finish();
+        }
     }
 
     /**

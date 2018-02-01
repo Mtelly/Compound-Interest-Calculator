@@ -100,18 +100,7 @@ public class ListDataActivity extends AppCompatActivity {
                     itemID = data.getInt(0);
                 }
                 displayWindow(name, itemID);
-                /*
-                if(itemID > -1){
-                    Log.d(TAG, "onItemClick: The ID is: " + itemID);
-                    Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
-                    editScreenIntent.putExtra("id",itemID);
-                    editScreenIntent.putExtra("name",name);
-                    startActivity(editScreenIntent);
-                }
-                else{
-                    toastMessage("No ID associated with that name");
-                }
-                */
+
             }
         });
     }
@@ -138,30 +127,18 @@ public class ListDataActivity extends AppCompatActivity {
                 .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                if(itemID2 > -1){
+                                if(itemID2 > -1) {
                                     Log.d(TAG, "onItemClick: The ID is: " + itemID2);
                                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
                                     editScreenIntent.putExtra("id",itemID2);
                                     editScreenIntent.putExtra("name",name2);
+                                    editScreenIntent.putExtra("type",10);
                                     startActivity(editScreenIntent);
                                     finish();
                                 }
-                                else{
+                                else {
                                     toastMessage("No ID associated with that name");
                                 }
-                                // get user input and set it to result
-                                // edit text
-                                //String test = userInput.getText().toString();
-                                //String newEntry = userInput.getText().toString();
-                                /*
-                                if (userInput.length() != 0) {
-                                    //AddData(newEntry);
-                                    userInput.setText("");
-                                } else {
-                                    toastMessage("You must put something in the text field!");
-                                }
-                                */
-                                //mResult.setText(test);
                             }
                         })
                 .setNegativeButton("Load",
