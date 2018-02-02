@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     RadioGroup radioGroup;
     Button continueNext, load;
     int formulaType;
+    Stack myStack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.calculateGroup);
         continueNext = (Button) findViewById(R.id.continue_next);
         load = (Button) findViewById(R.id.load);
+        myStack = new Stack(10);
 
         radioGroup.clearCheck();
 
@@ -62,28 +65,43 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void startFormula(int formulaType) {
         if(formulaType == 0) {
+            myStack.push(0);
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",myStack.getStackArr());
+            intent.putExtra("top",myStack.getTop());
             startActivity(intent);
             finish();
         } else if(formulaType == 1){
+            myStack.push(1);
             Intent intent = new Intent(this, AnnualCompoundInterest.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",myStack.getStackArr());
+            intent.putExtra("top",myStack.getTop());
             startActivity(intent);
             finish();
         } else if(formulaType == 2){
+            myStack.push(2);
             Intent intent = new Intent(this, SimpleInterestActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",myStack.getStackArr());
+            intent.putExtra("top",myStack.getTop());
             startActivity(intent);
             finish();
         } else if(formulaType == 3){
+            myStack.push(3);
             Intent intent = new Intent(this, ContinuouslyCompoundedActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",myStack.getStackArr());
+            intent.putExtra("top",myStack.getTop());
             startActivity(intent);
             finish();
         } else if(formulaType == 999) {
+            myStack.push(999);
             Intent intent = new Intent(this, ListDataActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",myStack.getStackArr());
+            intent.putExtra("top",myStack.getTop());
             startActivity(intent);
             finish();
         }

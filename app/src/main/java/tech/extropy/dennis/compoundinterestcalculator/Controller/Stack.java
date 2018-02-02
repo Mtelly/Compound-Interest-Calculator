@@ -11,11 +11,11 @@ public class Stack {
     private int top;
     private int size;
 
-    Stack(){
+    public Stack(){
         this(10);
     }
 
-    Stack(int size) {
+    public Stack(int size) {
         this.size = (size > 0) ? size : 10;
         top = -1;
         stackArr = new int[size];
@@ -23,18 +23,37 @@ public class Stack {
 
     public void push(int data){
         if(top == size - 1) {
-            Log.d("ERROR :", "There shouldn't be more than 10." );
+            Log.d("ERROR :", "Stack overflow exception." );
         } else {
+            Log.d("data :", ""+data);
             stackArr[++top] = data;
+            Log.d("top :",""+top);
         }
     }
 
-    public void pop(){
+    public int pop(){
         if(top < 0) {
-            Log.d("ERROR :","There shouldn't be more than 0.");
+            Log.d("ERROR :","Stack underflow exception.");
         } else {
-            stackArr[top--] = 0;
+            Log.d("top :", "" + top);
+            return stackArr[top--];
         }
+        return -100;
     }
 
+    public void setTop(int top){
+        this.top = top;
+    }
+
+    public int getTop(){
+        return top;
+    }
+
+    public void setStackArr(int[] stackArr){
+        this.stackArr = stackArr;
+    }
+
+    public int[] getStackArr(){
+        return stackArr;
+    }
 }
