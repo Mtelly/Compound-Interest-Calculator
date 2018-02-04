@@ -1,5 +1,6 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
 
 import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
@@ -66,7 +67,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         df2 = new DecimalFormat(".##");
         finance = new FinanceMath();
         intent = getIntent();
-        bd = intent.getExtras();
+        //bd = intent.getExtras();
         checkValidation = false;
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -186,12 +187,19 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
+                                        Stack newStack = new Stack();
 
                                         // get user input and set it to result
                                         // edit text
                                         //String test = userInput.getText().toString();
                                         Intent test = getIntent();
                                         int formulaType = test.getIntExtra("type", 9999);
+
+                                        //Copy stack from previous activity to the next.
+                                        int[] stackArr = test.getIntArrayExtra("intArr");
+                                        newStack.setStackArr(stackArr);
+                                        int top = test.getIntExtra("top",9999);
+                                        newStack.setTop(top);
 
                                         String newEntry = userInput.getText().toString();
                                         if (userInput.length() != 0) {
@@ -224,6 +232,19 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Stack newStack = new Stack();
+        Intent test = getIntent();
+        int formulaType = test.getIntExtra("type", 9999);
+
+        //Copy stack from previous activity to the next.
+        int[] stackArr = test.getIntArrayExtra("intArr");
+        newStack.setStackArr(stackArr);
+        int top = test.getIntExtra("top",9999);
+        newStack.setTop(top);
     }
 
 
