@@ -235,19 +235,28 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Stack newStack = new Stack();
         Intent test = getIntent();
-        int formulaType = test.getIntExtra("type", 9999);
+        Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
 
-        //Copy stack from previous activity to the next.
+        int formulaType = test.getIntExtra("type", 9999);
         int[] stackArr = test.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);
         int top = test.getIntExtra("top",9999);
         newStack.setTop(top);
+        newStack.pop();
+
+        //intent.putExtra("type", formulaType);
+        Log.d("formulaType :", ""+formulaType);
+        for(int arr: stackArr){
+            Log.d("stackArr :",""+arr);
+        }
+        Log.d("top :",""+top);
+
+        startActivity(intent);
+        finish();
     }
-
-
 
     public void AddData(String newEntry) {
         boolean insertData = mDatabaseHelper.addData(newEntry);

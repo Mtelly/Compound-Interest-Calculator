@@ -35,10 +35,18 @@ public class Stack {
         if(top < 0) {
             Log.d("ERROR :","Stack underflow exception.");
         } else {
-            Log.d("top :", "" + top);
+            Log.d("top :", "" + stackArr[top]);
             return stackArr[top--];
         }
         return -100;
+    }
+
+    public void peek(){
+        if(top < 0) {
+            Log.d("ERROR :","Stack underflow exception.");
+        } else {
+            Log.d("TOP :", ""+stackArr[top]);
+        }
     }
 
     public void setTop(int top){
