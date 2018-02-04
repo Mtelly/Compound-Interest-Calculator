@@ -187,13 +187,17 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
+
                                         Stack newStack = new Stack();
 
                                         // get user input and set it to result
                                         // edit text
-                                        //String test = userInput.getText().toString();
                                         Intent test = getIntent();
+
                                         int formulaType = test.getIntExtra("type", 9999);
+
+                                        newStack.push(4);
+
 
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = test.getIntArrayExtra("intArr");
@@ -201,13 +205,18 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         int top = test.getIntExtra("top",9999);
                                         newStack.setTop(top);
 
+
                                         String newEntry = userInput.getText().toString();
                                         if (userInput.length() != 0) {
                                             AddData(newEntry);
                                             userInput.setText("");
+
                                             //View list of data
                                             Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
                                             intent.putExtra("type", formulaType);
+                                            intent.putExtra("top", top);
+                                            intent.putExtra("stackArr", stackArr);
+                                            
                                             startActivity(intent);
                                             finish();
                                         } else {
