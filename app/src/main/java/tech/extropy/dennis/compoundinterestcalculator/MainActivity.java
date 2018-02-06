@@ -216,7 +216,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                             intent.putExtra("type", formulaType);
                                             intent.putExtra("top", top);
                                             intent.putExtra("stackArr", stackArr);
-                                            
+
                                             startActivity(intent);
                                             finish();
                                         } else {
@@ -249,10 +249,10 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         Intent test = getIntent();
         Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
 
-        int formulaType = test.getIntExtra("type", 9999);
-        int[] stackArr = test.getIntArrayExtra("intArr");
+        int formulaType = intent.getIntExtra("type", 9999);
+        int[] stackArr = intent.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);
-        int top = test.getIntExtra("top",9999);
+        int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
 

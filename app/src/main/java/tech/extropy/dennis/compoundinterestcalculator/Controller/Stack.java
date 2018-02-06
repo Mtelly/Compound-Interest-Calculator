@@ -35,7 +35,8 @@ public class Stack {
         if(top < 0) {
             Log.d("ERROR :","Stack underflow exception.");
         } else {
-            Log.d("top :", "" + stackArr[top]);
+            Log.d("top within stack:", ""+top);
+            Log.d("stackArry[top] :", "" + stackArr[top]);
             return stackArr[top--];
         }
         return -100;

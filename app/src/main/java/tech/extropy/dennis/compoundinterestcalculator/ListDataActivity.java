@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 
 /**
  * Created by dennis on 1/26/18.
@@ -51,9 +52,19 @@ public class ListDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        Stack newStack = new Stack();
+        //Intent test = getIntent();
+        Intent test = new Intent(ListDataActivity.this, MainActivity.class);
+
+        int formulaType = test.getIntExtra("type", 9999);
+        int[] stackArr = test.getIntArrayExtra("intArr");
+        newStack.setStackArr(stackArr);
+        int top = test.getIntExtra("top",9999);
+        newStack.setTop(top);
+        newStack.pop();
 
         int newActivity = intent.getIntExtra("type",9999);
-        int formulaType;
+
 
         if(newActivity == 999){
             formulaType = 999;
