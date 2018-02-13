@@ -192,12 +192,9 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
                                         // get user input and set it to result
                                         // edit text
-                                        intent = getIntent();
+                                        //intent = getIntent();
                                         int formulaType = intent.getIntExtra("type", 9999);
-
                                         newStack.push(4);
-
-
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
@@ -245,8 +242,6 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Stack newStack = new Stack();
-        Intent test = getIntent();
-        Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
 
         int formulaType = intent.getIntExtra("type", 9999);
         int[] stackArr = intent.getIntArrayExtra("intArr");
@@ -255,13 +250,10 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         newStack.setTop(top);
         newStack.pop();
 
-        //intent.putExtra("type", formulaType);
-        Log.d("formulaType :", ""+formulaType);
-        for(int arr: stackArr){
-            Log.d("stackArr :",""+arr);
-        }
-        Log.d("top :",""+top);
-
+        Intent nextIntent = new Intent(MainActivity.this, MainMenuActivity.class);
+        intent.putExtra("type", formulaType);
+        intent.putExtra("intArr",stackArr);
+        intent.putExtra("top",newStack.getTop());
         startActivity(intent);
         finish();
     }
