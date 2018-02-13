@@ -192,17 +192,16 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
                                         // get user input and set it to result
                                         // edit text
-                                        Intent test = getIntent();
-
-                                        int formulaType = test.getIntExtra("type", 9999);
+                                        intent = getIntent();
+                                        int formulaType = intent.getIntExtra("type", 9999);
 
                                         newStack.push(4);
 
 
                                         //Copy stack from previous activity to the next.
-                                        int[] stackArr = test.getIntArrayExtra("intArr");
+                                        int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
-                                        int top = test.getIntExtra("top",9999);
+                                        int top = intent.getIntExtra("top",9999);
                                         newStack.setTop(top);
 
 
