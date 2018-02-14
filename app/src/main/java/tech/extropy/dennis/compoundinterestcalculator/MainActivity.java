@@ -194,13 +194,18 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                         // edit text
                                         //intent = getIntent();
                                         int formulaType = intent.getIntExtra("type", 9999);
-                                        newStack.push(4);
+
+                                        //Log.d("formulaType234987 :",""+formulaType);
+
+                                        //newStack.push(4);
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
                                         int top = intent.getIntExtra("top",9999);
                                         newStack.setTop(top);
+                                        newStack.push(4);
 
+                                        newStack.printAll();
 
                                         String newEntry = userInput.getText().toString();
                                         if (userInput.length() != 0) {
@@ -209,8 +214,9 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
 
                                             //View list of data
                                             Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
-                                            intent.putExtra("type", formulaType);
-                                            intent.putExtra("top", top);
+                                            intent.putExtra("type", 5);
+                                            Log.d("top39284",""+newStack.getTop());
+                                            intent.putExtra("top", newStack.getTop());
                                             intent.putExtra("stackArr", stackArr);
 
                                             startActivity(intent);

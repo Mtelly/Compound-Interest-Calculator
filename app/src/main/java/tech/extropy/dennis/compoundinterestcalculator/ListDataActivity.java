@@ -53,30 +53,31 @@ public class ListDataActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Stack newStack = new Stack();
-        //Intent test = getIntent();
-        Intent test = new Intent(ListDataActivity.this, MainActivity.class);
 
-        int formulaType = test.getIntExtra("type", 9999);
-        int[] stackArr = test.getIntArrayExtra("intArr");
+        int formulaType = intent.getIntExtra("type", 9999);
+        int[] stackArr = intent.getIntArrayExtra("stackArr");
         newStack.setStackArr(stackArr);
-        int top = test.getIntExtra("top",9999);
+        int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
 
         int newActivity = intent.getIntExtra("type",9999);
 
-
         if(newActivity == 999){
             formulaType = 999;
             Intent intent = new Intent(this, MainMenuActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",stackArr);
+            intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             Log.d("onBackPressed() :","FINISH()");
             finish();
-        } else if(newActivity == 0) {
+        } else if(newActivity == 5) {
             formulaType = 0;
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",stackArr);
+            intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             finish();
         }
