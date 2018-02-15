@@ -257,10 +257,10 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         newStack.pop();
 
         Intent nextIntent = new Intent(MainActivity.this, MainMenuActivity.class);
-        intent.putExtra("type", formulaType);
-        intent.putExtra("intArr",stackArr);
-        intent.putExtra("top",newStack.getTop());
-        startActivity(intent);
+        nextIntent.putExtra("type", formulaType);
+        nextIntent.putExtra("intArr",stackArr);
+        nextIntent.putExtra("top",newStack.getTop());
+        startActivity(nextIntent);
         finish();
     }
 
