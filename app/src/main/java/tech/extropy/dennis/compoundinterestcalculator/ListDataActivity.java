@@ -54,17 +54,17 @@ public class ListDataActivity extends AppCompatActivity {
     public void onBackPressed(){
         Stack newStack = new Stack();
 
-        int formulaType = intent.getIntExtra("type", 9999);
-        int[] stackArr = intent.getIntArrayExtra("stackArr");
+        //int formulaType = intent.getIntExtra("type", 9999);
+        int[] stackArr = intent.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);
         int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
 
-        int newActivity = intent.getIntExtra("type",9999);
+        int formulaType = intent.getIntExtra("type",9999);
 
-        if(newActivity == 999){
-            formulaType = 999;
+        if(formulaType == 999){
+            //formulaType = 999;
             Intent intent = new Intent(this, MainMenuActivity.class);
             intent.putExtra("type", formulaType);
             intent.putExtra("intArr",stackArr);
@@ -72,8 +72,8 @@ public class ListDataActivity extends AppCompatActivity {
             startActivity(intent);
             Log.d("onBackPressed() :","FINISH()");
             finish();
-        } else if(newActivity == 5) {
-            formulaType = 0;
+        } else if(formulaType == 5) {
+            //formulaType = 0;
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("type", formulaType);
             intent.putExtra("intArr",stackArr);

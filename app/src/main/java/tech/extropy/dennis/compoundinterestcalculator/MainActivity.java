@@ -215,9 +215,8 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                             //View list of data
                                             Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
                                             intent.putExtra("type", 5);
-                                            Log.d("top39284",""+newStack.getTop());
                                             intent.putExtra("top", newStack.getTop());
-                                            intent.putExtra("stackArr", stackArr);
+                                            intent.putExtra("intArr", stackArr);
 
                                             startActivity(intent);
                                             finish();
