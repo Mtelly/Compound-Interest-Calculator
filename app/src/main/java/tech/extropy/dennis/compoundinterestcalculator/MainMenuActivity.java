@@ -1,15 +1,12 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
 import android.content.Intent;
-import android.preference.Preference;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
 import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -67,7 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void startFormula(int formulaType) {
         if(formulaType == 0) {
             myStack.push(0);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
             intent.putExtra("intArr",myStack.getStackArr());
             intent.putExtra("top",myStack.getTop());

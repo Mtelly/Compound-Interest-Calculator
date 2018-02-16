@@ -8,9 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
 
-public class MainActivity extends Activity { //extends AppCompatActivity {
+public class CompoundInterestAnnualAddition extends Activity { //extends AppCompatActivity {
     private static final String TAG = "MyActivity";
     TextView mYearsGrow, mInterestRate, mCurrentPrinciple, mAnnualAddition,
             mNumberOfTimesCompounded, mTotal;
@@ -213,7 +211,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
                                             userInput.setText("");
 
                                             //View list of data
-                                            Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
+                                            Intent intent = new Intent(CompoundInterestAnnualAddition.this, ListDataActivity.class);
                                             intent.putExtra("type", 5);
                                             intent.putExtra("top", newStack.getTop());
                                             intent.putExtra("intArr", stackArr);
@@ -255,7 +253,7 @@ public class MainActivity extends Activity { //extends AppCompatActivity {
         newStack.setTop(top);
         newStack.pop();
 
-        Intent nextIntent = new Intent(MainActivity.this, MainMenuActivity.class);
+        Intent nextIntent = new Intent(CompoundInterestAnnualAddition.this, MainMenuActivity.class);
         nextIntent.putExtra("type", formulaType);
         nextIntent.putExtra("intArr",stackArr);
         nextIntent.putExtra("top",newStack.getTop());

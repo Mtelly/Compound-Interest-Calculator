@@ -74,7 +74,7 @@ public class ListDataActivity extends AppCompatActivity {
             finish();
         } else if(formulaType == 5) {
             //formulaType = 0;
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
             intent.putExtra("intArr",stackArr);
             intent.putExtra("top",newStack.getTop());
@@ -158,7 +158,7 @@ public class ListDataActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog,int id) {
 
                                 //View list of data
-                                Intent intent = new Intent(ListDataActivity.this, MainActivity.class);
+                                Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
                                 startActivity(intent);
                                 finish();
                             }

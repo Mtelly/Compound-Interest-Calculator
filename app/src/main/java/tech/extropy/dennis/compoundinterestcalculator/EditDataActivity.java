@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
 import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
 
 /**
@@ -89,7 +87,7 @@ public class EditDataActivity extends AppCompatActivity {
             finish();
         } else if(newActivity == 0) {
             formulaType = 0;
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
             startActivity(intent);
             finish();

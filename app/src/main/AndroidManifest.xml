@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <!--
-        <activity android:name=".MainActivity"
+        <activity android:namCompoundInterestAnnualAdditionvity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         -->
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".CompoundInterestAnnualAddition"/>
         <activity android:name=".ListDataActivity"></activity>
         <activity android:name=".EditDataActivity"/>
         <activity android:name=".AnnualCompoundInterest" />

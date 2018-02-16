@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tech.extropy.dennis.compoundinterestcalculator.MainActivity">
+    tools:context="tech.extropy.dennis.compoundinterestcalculator.CompoundInterestAnnualAddition">
 
     <include
         layout="@layout/list_item"
