@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Model.DatabaseHelper;
 
 /**
@@ -74,6 +75,13 @@ public class EditDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Stack newStack = new Stack();
+
+        int[] stackArr = receivedIntent.getIntArrayExtra("intArr");
+        newStack.setStackArr(stackArr);
+        int top = receivedIntent.getIntExtra("top",9999);
+        newStack.setTop(top);
+        newStack.pop();
 
         int newActivity = receivedIntent.getIntExtra("type",9999);
         int formulaType;
@@ -95,6 +103,8 @@ public class EditDataActivity extends AppCompatActivity {
             formulaType = 10;
             Intent intent = new Intent(this, ListDataActivity.class);
             intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",stackArr);
+            intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             finish();
         }
@@ -107,5 +117,4 @@ public class EditDataActivity extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
-
 }

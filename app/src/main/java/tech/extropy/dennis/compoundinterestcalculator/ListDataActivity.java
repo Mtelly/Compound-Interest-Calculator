@@ -117,7 +117,7 @@ public class ListDataActivity extends AppCompatActivity {
         });
     }
 
-    public void displayWindow(String name, int itemID){
+    public void displayWindow(String name, int itemID) {
 // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(context1);
         View promptsView = li.inflate(R.layout.custom2, null);
@@ -140,8 +140,21 @@ public class ListDataActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 if(itemID2 > -1) {
+                                    Stack newStack = new Stack();
+
+                                    int[] stackArr = intent.getIntArrayExtra("intArr");
+                                    newStack.setStackArr(stackArr);
+                                    int top = intent.getIntExtra("top",9999);
+                                    newStack.setTop(top);
+                                    newStack.push(10);
+
                                     Log.d(TAG, "onItemClick: The ID is: " + itemID2);
                                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
+
+                                    editScreenIntent.putExtra("type", 5);
+                                    editScreenIntent.putExtra("top", newStack.getTop());
+                                    editScreenIntent.putExtra("intArr", stackArr);
+
                                     editScreenIntent.putExtra("id",itemID2);
                                     editScreenIntent.putExtra("name",name2);
                                     editScreenIntent.putExtra("type",10);
