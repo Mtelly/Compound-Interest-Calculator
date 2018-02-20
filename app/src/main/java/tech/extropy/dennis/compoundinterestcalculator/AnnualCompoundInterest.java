@@ -1,6 +1,7 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
 
 public class AnnualCompoundInterest extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class AnnualCompoundInterest extends AppCompatActivity {
     double currentPrinciple;
     double total;
     boolean checkValidation;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         mCalculate = (Button) findViewById(R.id.calculate);
         finance = new FinanceMath();
         checkValidation = false;
+        intent = getIntent();
 
         mTotal.setText("Total: $0.00");
         Context context = getApplicationContext();
@@ -124,6 +128,25 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                 }
 
             }});
+    }
+
+    @Override
+    public void onBackPressed(){
+        Stack newStack = new Stack();
+
+        int formulaType = intent.getIntExtra("type", 9999);
+        int[] stackArr = intent.getIntArrayExtra("intArr");
+        newStack.setStackArr(stackArr);
+        int top = intent.getIntExtra("top",9999);
+        newStack.setTop(top);
+        newStack.pop();
+
+        Intent nextIntent = new Intent(AnnualCompoundInterest.this, MainMenuActivity.class);
+        nextIntent.putExtra("type", formulaType);
+        nextIntent.putExtra("intArr",stackArr);
+        nextIntent.putExtra("top",newStack.getTop());
+        startActivity(nextIntent);
+        finish();
     }
 
     public boolean isEmpty(String strInput){
