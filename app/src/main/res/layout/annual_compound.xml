@@ -98,9 +98,9 @@
         android:id="@+id/calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/numberOfTimesCompounded"
-        android:layout_marginTop="27dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginTop="26dp"
         android:text="@string/calculate" />
 
     <TextView
@@ -111,5 +111,14 @@
         android:layout_marginTop="26dp"
         android:layout_toEndOf="@+id/numberOfTimesCompounded"
         android:text="@string/total" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/calculate"
+        android:layout_alignBottom="@+id/calculate"
+        android:layout_alignParentEnd="true"
+        android:text="@string/save" />
 
 </RelativeLayout>
