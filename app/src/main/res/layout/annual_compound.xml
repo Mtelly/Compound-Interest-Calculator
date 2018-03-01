@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/numberOfTimesCompounded"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="180dp"
         android:layout_marginTop="26dp"
         android:text="@string/calculate" />
 
@@ -119,6 +119,8 @@
         android:layout_alignBaseline="@+id/calculate"
         android:layout_alignBottom="@+id/calculate"
         android:layout_alignParentEnd="true"
+        android:layout_marginLeft="150px"
+        android:layout_toEndOf="@+id/numberOfTimesCompounded"
         android:text="@string/save" />
 
 </RelativeLayout>
