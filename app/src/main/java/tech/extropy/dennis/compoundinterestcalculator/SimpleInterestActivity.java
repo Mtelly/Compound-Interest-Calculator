@@ -1,5 +1,6 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,25 +14,20 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
 
 public class SimpleInterestActivity extends AppCompatActivity {
-    TextView mYearGrow;
-    TextView mInterestRate;
-    TextView mCurrentPrinciple;
-    EditText mYearGrowInput;
-    EditText mInterestRateInput;
-    EditText mCurrentPrincipleInput;
-    Button mCalculate;
+    TextView mYearGrow, mInterestRate, mCurrentPrinciple;
+    EditText mYearGrowInput, mInterestRateInput, mCurrentPrincipleInput;
+    Button mCalculate, mSave;
     TextView mTotal;
-    Button mSave;
     FinanceMath finance;
     DecimalFormat df2;
     String strInput;
     int yearsToGrow;
-    double interestRate;
-    double currentPrinciple;
-    double total;
+    Intent intent;
+    double interestRate, currentPrinciple, total;
     boolean checkValidation;
 
     @Override
@@ -49,6 +45,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
         mCalculate = (Button) findViewById(R.id.calculate);
         finance = new FinanceMath();
         checkValidation = false;
+        intent = getIntent();
 
         mTotal.setText("Total: $0.00");
         if(mYearGrowInput.requestFocus()) {
@@ -85,7 +82,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
                 }
 
                 strInput = mInterestRateInput.getText().toString();
-                if(isEmpty(strInput)){
+                if(isEmpty(strInput)) {
                     mInterestRateInput.setError("Input must not be empty.");
                     checkValidation = true;
                 } else {
@@ -94,7 +91,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
                 }
 
                 strInput = mCurrentPrincipleInput.getText().toString();
-                if(isEmpty(strInput)){
+                if(isEmpty(strInput)) {
                     mCurrentPrincipleInput.setError("Input must not be empty.");
                     checkValidation = true;
                 } else {
@@ -108,6 +105,25 @@ public class SimpleInterestActivity extends AppCompatActivity {
                     mTotal.setText("Total: " + "$" + df2.format(total));
                 }
             }});
+    }
+
+    @Override
+    public void onBackPressed(){
+        Stack newStack = new Stack();
+
+        int formulaType = intent.getIntExtra("type", 9999);
+        int[] stackArr = intent.getIntArrayExtra("intArr");
+        newStack.setStackArr(stackArr);
+        int top = intent.getIntExtra("top",9999);
+        newStack.setTop(top);
+        newStack.pop();
+
+        Intent nextIntent = new Intent(AnnualCompoundInterest.this, MainMenuActivity.class);
+        nextIntent.putExtra("type", formulaType);
+        nextIntent.putExtra("intArr",stackArr);
+        nextIntent.putExtra("top",newStack.getTop());
+        startActivity(nextIntent);
+        finish();
     }
 
     public boolean isEmpty(String strInput){
