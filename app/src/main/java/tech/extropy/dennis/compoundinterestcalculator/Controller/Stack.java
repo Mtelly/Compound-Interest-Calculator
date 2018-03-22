@@ -25,9 +25,7 @@ public class Stack {
         if(top == size - 1) {
             Log.d("ERROR :", "Stack overflow exception." );
         } else {
-            Log.d("data :", ""+data);
             stackArr[++top] = data;
-            Log.d("top :",""+top);
         }
     }
 
@@ -35,8 +33,6 @@ public class Stack {
         if(top < 0) {
             Log.d("ERROR :","Stack underflow exception.");
         } else {
-            Log.d("top within stack:", ""+top);
-            Log.d("stackArry[top] :", "" + stackArr[top]);
             return stackArr[top--];
         }
         return -100;
@@ -73,7 +69,7 @@ public class Stack {
         Log.d("printAll()","");
         Log.d("###################","#");
         for(int arr:stackArr){
-            Log.d("arr :"," "+x+" "+arr);
+            Log.d("arr :"," "+x+": "+arr);
             x++;
         }
         Log.d("###################","#");

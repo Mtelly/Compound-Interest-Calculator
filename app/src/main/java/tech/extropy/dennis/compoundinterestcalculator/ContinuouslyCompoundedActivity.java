@@ -126,6 +126,7 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
                     mTotal.setText("Total: " + "$" + df2.format(total));
                 }
             }});
+
 // add button listener
         mSave.setOnClickListener(new View.OnClickListener() {
 

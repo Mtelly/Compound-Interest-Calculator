@@ -47,11 +47,11 @@ public class ListDataActivity extends AppCompatActivity {
         intent = getIntent();
 
         populateListView();
-
     }
 
     @Override
     public void onBackPressed(){
+        Log.d("TEST93824","TEST93824");
         Stack newStack = new Stack();
 
         //int formulaType = intent.getIntExtra("type", 9999);
@@ -60,9 +60,11 @@ public class ListDataActivity extends AppCompatActivity {
         int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
+//Print ALL
+        newStack.printAll();
 
         int formulaType = intent.getIntExtra("type",9999);
-
+Log.d("formulaType : ",""+formulaType);
         if(formulaType == 999){
             //formulaType = 999;
             Intent intent = new Intent(this, MainMenuActivity.class);
@@ -70,9 +72,8 @@ public class ListDataActivity extends AppCompatActivity {
             intent.putExtra("intArr",stackArr);
             intent.putExtra("top",newStack.getTop());
             startActivity(intent);
-            Log.d("onBackPressed() :","FINISH()");
             finish();
-        } else if(formulaType == 5) {
+        } else if(formulaType == 10) {
             //formulaType = 0;
             Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
@@ -81,10 +82,10 @@ public class ListDataActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+Log.d("DIDN'T PASS","DIDN'T PASS");
     }
 
     private void populateListView() {
-        Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
         //get the data and append to a list
         Cursor data = mDatabaseHelper.getData();
@@ -103,7 +104,6 @@ public class ListDataActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String name = adapterView.getItemAtPosition(i).toString();
-                Log.d(TAG, "onItemClick: You Clicked on " + name);
 
                 Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
 
@@ -125,7 +125,6 @@ public class ListDataActivity extends AppCompatActivity {
         final int itemID2 = itemID;
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
-        Log.d("DialogInterface.", "DIALOG");
 
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
@@ -148,7 +147,6 @@ public class ListDataActivity extends AppCompatActivity {
                                     newStack.setTop(top);
                                     newStack.push(10);
 
-                                    Log.d(TAG, "onItemClick: The ID is: " + itemID2);
                                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
 
                                     editScreenIntent.putExtra("type", 5);
