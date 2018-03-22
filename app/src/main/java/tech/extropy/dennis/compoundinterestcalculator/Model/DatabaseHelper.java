@@ -14,11 +14,16 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
-    private static final String TABLE_NAME = "people_table";
+    private static final String TABLE_NAME = "interest_table";
     private static final String COL1 = "ID";
-    private static final String COL2 = "name";
+    private static final String COL2 = "years_to_grow";
+    private static final String COL3 = "interest_rate";
+    private static final String COL4 = "current_principle";
+    private static final String COL5 = "annual_addition";
+    private static final String COL6 = "number_of_time_compounded_annually";
+    private static final String COL7 = "make_additions_end_or_start";
 
-    public DatabaseHelper(Context context){
+    public DatabaseHelper(Context context) {
         //Factory is SQLiteDatabase.CursorFactory
         super(context, TABLE_NAME, null, 1);
     }
@@ -26,9 +31,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //When the table is created for the first time.
     @Override
     public void onCreate(SQLiteDatabase db){
-        //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)
+        //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, YearsToGrow TEXT)
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 +" TEXT)";
+                COL2 + " INT, " + COL3 + " INT, " + COL4 + " INT, " + COL5 + "INT,"+
+                COL6 + "INT," + COL7 + "INT)";
         //execSQL: Execute a single SQL statement
         //that is NOT a SELECT or any other SQL statement that returns data.
         db.execSQL(createTable);
