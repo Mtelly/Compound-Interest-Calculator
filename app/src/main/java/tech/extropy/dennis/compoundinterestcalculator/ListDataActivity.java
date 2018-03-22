@@ -51,20 +51,16 @@ public class ListDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Log.d("TEST93824","TEST93824");
         Stack newStack = new Stack();
 
-        //int formulaType = intent.getIntExtra("type", 9999);
         int[] stackArr = intent.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);
         int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
-//Print ALL
         newStack.printAll();
 
         int formulaType = intent.getIntExtra("type",9999);
-Log.d("formulaType : ",""+formulaType);
         if(formulaType == 999){
             //formulaType = 999;
             Intent intent = new Intent(this, MainMenuActivity.class);
@@ -82,7 +78,6 @@ Log.d("formulaType : ",""+formulaType);
             startActivity(intent);
             finish();
         }
-Log.d("DIDN'T PASS","DIDN'T PASS");
     }
 
     private void populateListView() {
