@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,7 +110,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                        TestPrintDatabase();
                         checkValidation = false;
                         strInput = mYearsGrowInput.getText().toString();
                         if(isEmpty(strInput)){
@@ -205,9 +206,13 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
                                         newStack.printAll();
 
-                                        String newEntry = userInput.getText().toString();
+                                        //File name is asked here.
+                                        String fileName = userInput.getText().toString();
+
+                                        //(fileName, yearsToGrow, currentPrinciple, annualAddition, numberOfTimesCompounded)
                                         if (userInput.length() != 0) {
-                                            AddData(newEntry);
+                                            AddData(fileName, yearsToGrow, interestRate, currentPrinciple,
+                                                    annualAddition, numberOfTimesCompounded, startOrEnd);
                                             userInput.setText("");
 
                                             //View list of data
@@ -215,9 +220,9 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                                             intent.putExtra("type", 5);
                                             intent.putExtra("top", newStack.getTop());
                                             intent.putExtra("intArr", stackArr);
-
                                             startActivity(intent);
                                             finish();
+
                                         } else {
                                             toastMessage("You must put something in the text field!");
                                         }
@@ -261,8 +266,11 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         finish();
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+    public void AddData(String fileName,int yearsToGrow,double interestRate,
+                        double currentPrinciple,double annualAddition,int numberOfTimesCompounded, int startOrEnd) {
+
+        boolean insertData = mDatabaseHelper.addData(fileName, interestRate,yearsToGrow,
+                currentPrinciple, annualAddition, numberOfTimesCompounded, startOrEnd);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
@@ -289,4 +297,13 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
     }
 
+    /*This is test method to be deleted.*/
+    public void TestPrintDatabase(){
+        //TESTING
+        Cursor cursorTest = mDatabaseHelper.getData();
+        String[] columnNames = cursorTest.getColumnNames();
+        for(String x: columnNames) {
+            Log.d("columnName :", x);
+        }
+    }
 }

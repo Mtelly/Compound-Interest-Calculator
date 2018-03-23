@@ -16,12 +16,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
     private static final String TABLE_NAME = "interest_table";
     private static final String COL1 = "ID";
-    private static final String COL2 = "years_to_grow";
-    private static final String COL3 = "interest_rate";
-    private static final String COL4 = "current_principle";
-    private static final String COL5 = "annual_addition";
-    private static final String COL6 = "number_of_time_compounded_annually";
-    private static final String COL7 = "make_additions_end_or_start";
+    private static final String COL2 = "file_name";
+    private static final String COL3 = "years_to_grow";
+    private static final String COL4 = "interest_rate";
+    private static final String COL5 = "current_principle";
+    private static final String COL6 = "annual_addition";
+    private static final String COL7 = "number_of_time_compounded_annually";
+    private static final String COL8 = "make_additions_end_or_start";
 
     public DatabaseHelper(Context context) {
         //Factory is SQLiteDatabase.CursorFactory
@@ -33,8 +34,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, YearsToGrow TEXT)
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 + " INT, " + COL3 + " INT, " + COL4 + " INT, " + COL5 + "INT,"+
-                COL6 + "INT," + COL7 + "INT)";
+                COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
+                COL7 + " INT,"+COL8+" INT)";
+
         //execSQL: Execute a single SQL statement
         //that is NOT a SELECT or any other SQL statement that returns data.
         db.execSQL(createTable);
@@ -50,7 +52,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    //CompoundedInterestAnnualAddition
+    public boolean addData(String fileName,double interestRate,int yearsToGrow,
+                           double currentPrinciple,double annualAddition,int numberOfTimesCompounded,int startOrEnd) {
         /*Create and/or open a database that will be used for reading and writing.
         The first time this is called, the database will be opened and
         onCreate(SQLiteDatabase), onUpgrade(SQLiteDatabase, int, int) and/or onOpen(SQLiteDatabase)
@@ -61,14 +65,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         //name that maps to a String item.
-        contentValues.put(COL2, item);
+        contentValues.put(COL2, fileName);
+        contentValues.put(COL3, yearsToGrow);
+        contentValues.put(COL4, interestRate);
+        contentValues.put(COL5, currentPrinciple);
+        contentValues.put(COL6, annualAddition);
+        contentValues.put(COL7, numberOfTimesCompounded);
+        contentValues.put(COL8, startOrEnd);
+        /*
+        COL2 = "file_name";
+        COL3 = "years_to_grow";
+        COL4 = "interest_rate";
+        COL5 = "current_principle";
+        COL6 = "annual_addition";
+        COL7 = "number_of_time_compounded_annually";
+        COL8 = "make_additions_end_or_start";
+        * */
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + fileName + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + yearsToGrow + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + interestRate + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + currentPrinciple + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + annualAddition + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + numberOfTimesCompounded + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + startOrEnd + " to " + TABLE_NAME);
 
         //insert: Convenience method for inserting a row into the database.
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //original
+    public boolean addData(String item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL2, item);
+
+        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
         if (result == -1) {
             return false;
         } else {
