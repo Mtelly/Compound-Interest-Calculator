@@ -115,6 +115,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //SimpleInterestActivity
+    public boolean addData(String fileName, int yearsToGrow,
+                           double interestRate, double currentPrinciple) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        Log.d("fileName :",""+fileName);
+        Log.d("yearsToGrow :",""+yearsToGrow);
+        Log.d("interestRate :",""+interestRate);
+        Log.d("currentPrinciple :",""+currentPrinciple);
+
+        Log.d(TAG, "addData: Adding " + fileName + " to " + TABLE_NAME);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //original
     public boolean addData(String item) {
         SQLiteDatabase db = this.getWritableDatabase();

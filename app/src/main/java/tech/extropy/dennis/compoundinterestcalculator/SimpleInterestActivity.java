@@ -161,9 +161,10 @@ public class SimpleInterestActivity extends AppCompatActivity {
 
                                         newStack.printAll();
 
-                                        String newEntry = userInput.getText().toString();
+                                        String fileName = userInput.getText().toString();
                                         if (userInput.length() != 0) {
-                                            AddData(newEntry);
+
+                                            AddData(fileName, yearsToGrow, interestRate, currentPrinciple);
                                             userInput.setText("");
 
                                             //View list of data
@@ -216,9 +217,9 @@ public class SimpleInterestActivity extends AppCompatActivity {
         startActivity(nextIntent);
         finish();
     }
-
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+//fileName, yearsToGrow, interestRate, currentPrinciple
+    public void AddData(String fileName, int yearsToGrow, double interestRate, double currentPrinciple) {
+        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate, currentPrinciple);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
