@@ -158,13 +158,8 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                                         Stack newStack = new Stack();
 
                                         // get user input and set it to result
-                                        // edit text
-                                        //intent = getIntent();
                                         int formulaType = intent.getIntExtra("type", 9999);
 
-                                        //Log.d("formulaType234987 :",""+formulaType);
-
-                                        //newStack.push(4);
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
@@ -173,10 +168,15 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                                         newStack.push(4);
 
                                         newStack.printAll();
+                                        /*Years to grow, interest rate, current principle, number of times compounded annually*/
+                                        Log.d("yearsToGrow :",""+yearsToGrow);
+                                        Log.d("interestRate :",""+interestRate);
+                                        Log.d("currentPrinciple :",""+currentPrinciple);
+                                        Log.d("numberOfTimesCompute :",""+numberOfTimesCompoundedCompute);
 
-                                        String newEntry = userInput.getText().toString();
+                                        String fileName = userInput.getText().toString();
                                         if (userInput.length() != 0) {
-                                            AddData(newEntry);
+                                            AddData(fileName, yearsToGrow, interestRate, currentPrinciple, numberOfTimesCompoundedCompute);
                                             userInput.setText("");
 
                                             //View list of data
@@ -231,8 +231,17 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         finish();
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+    /*Years to grow, interest rate, current principle, number of times compounded annually*/
+
+    public void AddData(String fileName,int yearsToGrow, double interestRate,
+                        double currentPrinciple, int numberOfTimesCompoundedCompute) {
+        
+        Log.d("yearsToGrow :",""+yearsToGrow);
+        Log.d("interestRate :",""+interestRate);
+        Log.d("currentPrinciple :",""+currentPrinciple);
+        Log.d("numberOfTimesCompute :",""+numberOfTimesCompoundedCompute);
+
+        boolean insertData = mDatabaseHelper.addData(fileName);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
