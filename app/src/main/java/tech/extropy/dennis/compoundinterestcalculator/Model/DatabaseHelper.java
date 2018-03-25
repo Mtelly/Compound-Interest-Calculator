@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //When the table is created for the first time.
     @Override
-    public void onCreate(SQLiteDatabase db){
+    public void onCreate(SQLiteDatabase db) {
         //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, YearsToGrow TEXT)
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
@@ -72,23 +72,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL6, annualAddition);
         contentValues.put(COL7, numberOfTimesCompounded);
         contentValues.put(COL8, startOrEnd);
-        /*
-        COL2 = "file_name";
-        COL3 = "years_to_grow";
-        COL4 = "interest_rate";
-        COL5 = "current_principle";
-        COL6 = "annual_addition";
-        COL7 = "number_of_time_compounded_annually";
-        COL8 = "make_additions_end_or_start";
-        * */
 
-        Log.d(TAG, "addData: Adding " + fileName + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + yearsToGrow + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + interestRate + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + currentPrinciple + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + annualAddition + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + numberOfTimesCompounded + " to " + TABLE_NAME);
-        Log.d(TAG, "addData: Adding " + startOrEnd + " to " + TABLE_NAME);
+        //insert: Convenience method for inserting a row into the database.
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    //CompoundedInterestAnnualAddition
+    public boolean addData(String fileName,int yearsToGrow, double interestRate,
+                           double currentPrinciple, int numberOfTimesCompoundedCompute) {
+        /*Create and/or open a database that will be used for reading and writing.
+        The first time this is called, the database will be opened and
+        onCreate(SQLiteDatabase), onUpgrade(SQLiteDatabase, int, int) and/or onOpen(SQLiteDatabase)
+        will be called. */
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //This class is used to store a set of values that the ContentResolver can process.
+        ContentValues contentValues = new ContentValues();
+
+        //name that maps to a String item.
+        contentValues.put(COL2, fileName);
+        contentValues.put(COL3, yearsToGrow);
+        contentValues.put(COL4, interestRate);
+        contentValues.put(COL5, currentPrinciple);
+        contentValues.put(COL7, numberOfTimesCompoundedCompute);
 
         //insert: Convenience method for inserting a row into the database.
         long result = db.insert(TABLE_NAME, null, contentValues);

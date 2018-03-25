@@ -168,11 +168,6 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                                         newStack.push(4);
 
                                         newStack.printAll();
-                                        /*Years to grow, interest rate, current principle, number of times compounded annually*/
-                                        Log.d("yearsToGrow :",""+yearsToGrow);
-                                        Log.d("interestRate :",""+interestRate);
-                                        Log.d("currentPrinciple :",""+currentPrinciple);
-                                        Log.d("numberOfTimesCompute :",""+numberOfTimesCompoundedCompute);
 
                                         String fileName = userInput.getText().toString();
                                         if (userInput.length() != 0) {
@@ -224,24 +219,15 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         newStack.pop();
 
         Intent nextIntent = new Intent(AnnualCompoundInterest.this, MainMenuActivity.class);
-        nextIntent.putExtra("type", formulaType);
-        nextIntent.putExtra("intArr",stackArr);
-        nextIntent.putExtra("top",newStack.getTop());
         startActivity(nextIntent);
         finish();
     }
 
     /*Years to grow, interest rate, current principle, number of times compounded annually*/
-
     public void AddData(String fileName,int yearsToGrow, double interestRate,
                         double currentPrinciple, int numberOfTimesCompoundedCompute) {
-        
-        Log.d("yearsToGrow :",""+yearsToGrow);
-        Log.d("interestRate :",""+interestRate);
-        Log.d("currentPrinciple :",""+currentPrinciple);
-        Log.d("numberOfTimesCompute :",""+numberOfTimesCompoundedCompute);
 
-        boolean insertData = mDatabaseHelper.addData(fileName);
+        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate, currentPrinciple, numberOfTimesCompoundedCompute);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
