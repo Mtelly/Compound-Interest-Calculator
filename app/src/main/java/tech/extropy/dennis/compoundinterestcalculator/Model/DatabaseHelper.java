@@ -115,17 +115,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //SimpleInterestActivity
+    //SimpleInterestActivity and ContinuouslyCompoundedActivity
     public boolean addData(String fileName, int yearsToGrow,
                            double interestRate, double currentPrinciple) {
-
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        Log.d("fileName :",""+fileName);
-        Log.d("yearsToGrow :",""+yearsToGrow);
-        Log.d("interestRate :",""+interestRate);
-        Log.d("currentPrinciple :",""+currentPrinciple);
+        contentValues.put(COL2, fileName);
+        contentValues.put(COL3, yearsToGrow);
+        contentValues.put(COL4, interestRate);
+        contentValues.put(COL5, currentPrinciple);
 
         Log.d(TAG, "addData: Adding " + fileName + " to " + TABLE_NAME);
 
