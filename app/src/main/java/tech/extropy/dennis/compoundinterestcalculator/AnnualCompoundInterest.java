@@ -218,6 +218,9 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         newStack.pop();
 
         Intent nextIntent = new Intent(AnnualCompoundInterest.this, MainMenuActivity.class);
+        nextIntent.putExtra("type", formulaType);
+        nextIntent.putExtra("intArr",stackArr);
+        nextIntent.putExtra("top",newStack.getTop());
         startActivity(nextIntent);
         finish();
     }
