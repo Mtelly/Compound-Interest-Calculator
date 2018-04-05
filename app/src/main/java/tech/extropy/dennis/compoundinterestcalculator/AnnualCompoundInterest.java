@@ -3,6 +3,7 @@ package tech.extropy.dennis.compoundinterestcalculator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -253,4 +254,6 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         }
 
     }
+
+
 }

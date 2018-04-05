@@ -3,6 +3,7 @@ package tech.extropy.dennis.compoundinterestcalculator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -113,7 +114,7 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
 
                 strInput = mCurrentPrincipleInput.getText().toString();
 
-                if(isEmpty(mCurrentPrincipleInput.getText().toString())){
+                if(isEmpty(mCurrentPrincipleInput.getText().toString())) {
                     mCurrentPrincipleInput.setError("Input must not be empty.");
                     checkValidation = true;
                 } else {
@@ -252,4 +253,6 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
 }

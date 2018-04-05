@@ -66,7 +66,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         df2 = new DecimalFormat(".##");
         finance = new FinanceMath();
         intent = getIntent();
-        //bd = intent.getExtras();
         checkValidation = false;
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -191,18 +190,14 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
                                         // get user input and set it to result
                                         // edit text
-                                        //intent = getIntent();
                                         int formulaType = intent.getIntExtra("type", 9999);
 
-                                        //Log.d("formulaType234987 :",""+formulaType);
-
-                                        //newStack.push(4);
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
                                         int top = intent.getIntExtra("top",9999);
                                         newStack.setTop(top);
-                                        newStack.push(4);
+                                        newStack.push(5);
 
                                         newStack.printAll();
 
