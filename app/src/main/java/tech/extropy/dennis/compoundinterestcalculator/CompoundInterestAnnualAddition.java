@@ -197,7 +197,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                                         newStack.setStackArr(stackArr);
                                         int top = intent.getIntExtra("top",9999);
                                         newStack.setTop(top);
-                                        newStack.push(5);
+                                        newStack.push(4);
 
                                         newStack.printAll();
 
@@ -212,9 +212,9 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
                                             //View list of data
                                             Intent intent = new Intent(CompoundInterestAnnualAddition.this, ListDataActivity.class);
-                                            intent.putExtra("type", 5);
+                                            intent.putExtra("type", 4);
                                             intent.putExtra("top", newStack.getTop());
-                                            intent.putExtra("intArr", stackArr);
+                                            intent.putExtra("intArr", newStack.getStackArr());
                                             startActivity(intent);
                                             finish();
 

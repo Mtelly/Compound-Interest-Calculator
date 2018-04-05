@@ -60,6 +60,7 @@ public class ListDataActivity extends AppCompatActivity {
         newStack.pop();
 
         int formulaType = intent.getIntExtra("type",9999);
+        Log.d("newStack.peek() :",""+newStack.peek());
         if(newStack.peek() == 100){
             Intent intent = new Intent(this, MainMenuActivity.class);
             intent.putExtra("type", formulaType);
@@ -67,7 +68,7 @@ public class ListDataActivity extends AppCompatActivity {
             intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             finish();
-        } else if(newStack.peek() == 10) {
+        } else if(newStack.peek() == 0) {
             //formulaType = 0;
             Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
