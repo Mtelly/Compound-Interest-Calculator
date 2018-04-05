@@ -187,11 +187,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                                     public void onClick(DialogInterface dialog,int id) {
 
                                         Stack newStack = new Stack();
-
-                                        // get user input and set it to result
-                                        // edit text
-                                        int formulaType = intent.getIntExtra("type", 9999);
-
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);

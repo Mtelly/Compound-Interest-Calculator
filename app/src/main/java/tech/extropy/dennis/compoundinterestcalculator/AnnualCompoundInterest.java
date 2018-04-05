@@ -157,10 +157,6 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
 
                                         Stack newStack = new Stack();
-
-                                        // get user input and set it to result
-                                        int formulaType = intent.getIntExtra("type", 9999);
-
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
@@ -171,16 +167,18 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                                         newStack.printAll();
 
                                         String fileName = userInput.getText().toString();
+
+
+
                                         if (userInput.length() != 0) {
                                             AddData(fileName, yearsToGrow, interestRate, currentPrinciple, numberOfTimesCompoundedCompute);
                                             userInput.setText("");
 
                                             //View list of data
                                             Intent intent = new Intent(AnnualCompoundInterest.this, ListDataActivity.class);
-                                            intent.putExtra("type", 5);
+                                            intent.putExtra("type", 4);
                                             intent.putExtra("top", newStack.getTop());
-                                            intent.putExtra("intArr", stackArr);
-
+                                            intent.putExtra("intArr", newStack.getStackArr());
                                             startActivity(intent);
                                             finish();
                                         } else {

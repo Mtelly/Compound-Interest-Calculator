@@ -76,6 +76,14 @@ public class ListDataActivity extends AppCompatActivity {
             intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             finish();
+        } else if(newStack.peek() == 1) {
+            //formulaType = 0;
+            Intent intent = new Intent(this, AnnualCompoundInterest.class);
+            intent.putExtra("type", formulaType);
+            intent.putExtra("intArr",stackArr);
+            intent.putExtra("top",newStack.getTop());
+            startActivity(intent);
+            finish();
         }
     }
 
