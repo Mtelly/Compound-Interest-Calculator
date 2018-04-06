@@ -92,7 +92,15 @@ public class ListDataActivity extends AppCompatActivity {
         intent.putExtra("top",newStack.getTop());
         startActivity(intent);
         finish();
-        }
+        } else if(newStack.peek() == 3) {
+        //formulaType = 0;
+        Intent intent = new Intent(this, ContinuouslyCompoundedActivity.class);
+        intent.putExtra("type", formulaType);
+        intent.putExtra("intArr",stackArr);
+        intent.putExtra("top",newStack.getTop());
+        startActivity(intent);
+        finish();
+    }
     }
 
     private void populateListView() {

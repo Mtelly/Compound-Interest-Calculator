@@ -153,7 +153,6 @@ public class SimpleInterestActivity extends AppCompatActivity {
                                         newStack.printAll();
 
                                         String fileName = userInput.getText().toString();
-
                                         if (userInput.length() != 0) {
                                             AddData(fileName, yearsToGrow, interestRate, currentPrinciple);
                                             userInput.setText("");
@@ -193,7 +192,6 @@ public class SimpleInterestActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Stack newStack = new Stack();
-
         int formulaType = intent.getIntExtra("type", 9999);
         int[] stackArr = intent.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);

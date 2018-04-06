@@ -154,15 +154,6 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
 
                                         Stack newStack = new Stack();
-
-                                        // get user input and set it to result
-                                        // edit text
-                                        //intent = getIntent();
-                                        int formulaType = intent.getIntExtra("type", 9999);
-
-                                        //Log.d("formulaType234987 :",""+formulaType);
-
-                                        //newStack.push(4);
                                         //Copy stack from previous activity to the next.
                                         int[] stackArr = intent.getIntArrayExtra("intArr");
                                         newStack.setStackArr(stackArr);
@@ -179,10 +170,9 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
 
                                             //View list of data
                                             Intent intent = new Intent(ContinuouslyCompoundedActivity.this, ListDataActivity.class);
-                                            intent.putExtra("type", 5);
+                                            intent.putExtra("type", 4);
                                             intent.putExtra("top", newStack.getTop());
-                                            intent.putExtra("intArr", stackArr);
-
+                                            intent.putExtra("intArr", newStack.getStackArr());
                                             startActivity(intent);
                                             finish();
                                         } else {
