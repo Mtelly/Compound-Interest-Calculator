@@ -82,37 +82,15 @@ public class EditDataActivity extends AppCompatActivity {
         int top = receivedIntent.getIntExtra("top",9999);
         newStack.setTop(top);
         newStack.pop();
-
-        //int newActivity = receivedIntent.getIntExtra("type",9999);
         int formulaType;
-/*
-        if(newActivity == 999) {
-            formulaType = 999;
-            Intent intent = new Intent(this, MainMenuActivity.class);
-            intent.putExtra("type", formulaType);
-            startActivity(intent);
-            Log.d("onBackPressed() :","FINISH()");
-            finish();
-        } else if(newActivity == 0) {
-*/
         formulaType = 0;
+        
         Intent intent = new Intent(this, ListDataActivity.class);
         intent.putExtra("type", formulaType);
         intent.putExtra("intArr",stackArr);
         intent.putExtra("top",newStack.getTop());
         startActivity(intent);
         finish();
-/*
-        } else if(newActivity == 10) {
-            formulaType = 10;
-            Intent intent = new Intent(this, ListDataActivity.class);
-            intent.putExtra("type", formulaType);
-            intent.putExtra("intArr",stackArr);
-            intent.putExtra("top",newStack.getTop());
-            startActivity(intent);
-            finish();
-        }
-*/
     }
 
     /**
