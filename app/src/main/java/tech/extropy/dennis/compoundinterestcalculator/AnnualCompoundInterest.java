@@ -168,8 +168,6 @@ public class AnnualCompoundInterest extends AppCompatActivity {
 
                                         String fileName = userInput.getText().toString();
 
-
-
                                         if (userInput.length() != 0) {
                                             AddData(fileName, yearsToGrow, interestRate, currentPrinciple, numberOfTimesCompoundedCompute);
                                             userInput.setText("");
