@@ -64,6 +64,8 @@ public class Stack {
     }
 
     public void printAll(){
+        Log.d("Top :",""+top);
+        Log.d("Size",""+size);
         int x = 0;
         Log.d("###################","#");
         Log.d("printAll()","");

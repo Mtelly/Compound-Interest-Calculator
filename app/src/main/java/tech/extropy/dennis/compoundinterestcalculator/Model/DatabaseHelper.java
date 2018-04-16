@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL6 = "annual_addition";
     private static final String COL7 = "number_of_time_compounded_annually";
     private static final String COL8 = "make_additions_end_or_start";
+    private static final String COL9 = "class_type";
 
     public DatabaseHelper(Context context) {
         //Factory is SQLiteDatabase.CursorFactory
@@ -35,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, YearsToGrow TEXT)
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
-                COL7 + " INT,"+COL8+" INT)";
+                COL7 + " INT,"+COL8+" INT,"+COL9+" TEXT)";
 
         //execSQL: Execute a single SQL statement
         //that is NOT a SELECT or any other SQL statement that returns data.
@@ -54,7 +55,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //CompoundedInterestAnnualAddition
     public boolean addData(String fileName,double interestRate,int yearsToGrow,
-                           double currentPrinciple,double annualAddition,int numberOfTimesCompounded,int startOrEnd) {
+                           double currentPrinciple,double annualAddition,
+                           int numberOfTimesCompounded,int startOrEnd, String class_type) {
         /*Create and/or open a database that will be used for reading and writing.
         The first time this is called, the database will be opened and
         onCreate(SQLiteDatabase), onUpgrade(SQLiteDatabase, int, int) and/or onOpen(SQLiteDatabase)
@@ -72,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL6, annualAddition);
         contentValues.put(COL7, numberOfTimesCompounded);
         contentValues.put(COL8, startOrEnd);
+        contentValues.put(COL9, class_type);
 
         //insert: Convenience method for inserting a row into the database.
         long result = db.insert(TABLE_NAME, null, contentValues);

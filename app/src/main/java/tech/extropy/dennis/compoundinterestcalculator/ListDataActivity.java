@@ -68,7 +68,7 @@ public class ListDataActivity extends AppCompatActivity {
             intent.putExtra("top",newStack.getTop());
             startActivity(intent);
             finish();
-        } else if(newStack.peek() == 0) {
+        } else if(newStack.peek() == 6) {
             //formulaType = 0;
             Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
@@ -185,6 +185,22 @@ public class ListDataActivity extends AppCompatActivity {
                 .setNegativeButton("Load",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
+                                Stack newStack = new Stack();
+                                int[] stackArr = intent.getIntArrayExtra("intArr");
+                                newStack.setStackArr(stackArr);
+                                int top = intent.getIntExtra("top",9999);
+                                newStack.setTop(top);
+//Todo: I need to retrieve the table type from the database prior to class loading.
+                                int formulaType = intent.getIntExtra("type",9999);
+
+                                if(newStack.peek() == 6) {
+                                    Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
+                                    intent.putExtra("type", formulaType);
+                                    intent.putExtra("intArr",stackArr);
+                                    intent.putExtra("top",newStack.getTop());
+                                    startActivity(intent);
+                                    finish();
+                                }
 
                                 //View list of data
                                 Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);

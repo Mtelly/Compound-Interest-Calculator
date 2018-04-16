@@ -32,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.compoundInterestWithAnnualAdd) {
-                    formulaType = 0;
+                    formulaType = 6;
                 } else if (checkedId == R.id.annual_comp_int) {
                     formulaType = 1;
                 } else if(checkedId == R.id.simple_interest) {
@@ -62,9 +62,9 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void startFormula(int formulaType) {
-        if(formulaType == 0) {
+        if(formulaType == 6) {
             myStack.push(100);
-            myStack.push(0);
+            myStack.push(6);
             Intent intent = new Intent(this, CompoundInterestAnnualAddition.class);
             intent.putExtra("type", formulaType);
             intent.putExtra("intArr",myStack.getStackArr());

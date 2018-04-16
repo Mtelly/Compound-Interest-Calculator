@@ -194,8 +194,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                                         newStack.setTop(top);
                                         newStack.push(4);
 
-                                        newStack.printAll();
-
                                         //File name is asked here.
                                         String fileName = userInput.getText().toString();
 
@@ -240,27 +238,40 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
     @Override
     public void onBackPressed() {
         Stack newStack = new Stack();
-
         int formulaType = intent.getIntExtra("type", 9999);
         int[] stackArr = intent.getIntArrayExtra("intArr");
         newStack.setStackArr(stackArr);
         int top = intent.getIntExtra("top",9999);
         newStack.setTop(top);
+
+        Log.d("onBackPressed() :","");
+        newStack.printAll();
+
         newStack.pop();
 
-        Intent nextIntent = new Intent(CompoundInterestAnnualAddition.this, MainMenuActivity.class);
-        nextIntent.putExtra("type", formulaType);
-        nextIntent.putExtra("intArr",stackArr);
-        nextIntent.putExtra("top",newStack.getTop());
-        startActivity(nextIntent);
-        finish();
+        if(newStack.peek() == 4)
+        {
+            Intent nextIntent = new Intent(CompoundInterestAnnualAddition.this, ListDataActivity.class);
+            nextIntent.putExtra("type", formulaType);
+            nextIntent.putExtra("intArr", stackArr);
+            nextIntent.putExtra("top", newStack.getTop());
+            startActivity(nextIntent);
+            finish();
+        } else if(newStack.peek() == 100) {
+            Intent nextIntent = new Intent(CompoundInterestAnnualAddition.this, MainMenuActivity.class);
+            nextIntent.putExtra("type", formulaType);
+            nextIntent.putExtra("intArr", stackArr);
+            nextIntent.putExtra("top", newStack.getTop());
+            startActivity(nextIntent);
+            finish();
+        }
     }
 
     public void AddData(String fileName,int yearsToGrow,double interestRate,
                         double currentPrinciple,double annualAddition,int numberOfTimesCompounded, int startOrEnd) {
 
         boolean insertData = mDatabaseHelper.addData(fileName, interestRate,yearsToGrow,
-                currentPrinciple, annualAddition, numberOfTimesCompounded, startOrEnd);
+                currentPrinciple, annualAddition, numberOfTimesCompounded, startOrEnd, "CompoundInterestAnnualAddition");
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

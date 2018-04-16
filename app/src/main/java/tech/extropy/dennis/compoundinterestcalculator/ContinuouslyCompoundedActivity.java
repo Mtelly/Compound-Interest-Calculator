@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
@@ -209,12 +210,22 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
         newStack.setTop(top);
         newStack.pop();
 
-        Intent nextIntent = new Intent(ContinuouslyCompoundedActivity.this, MainMenuActivity.class);
-        nextIntent.putExtra("type", formulaType);
-        nextIntent.putExtra("intArr",stackArr);
-        nextIntent.putExtra("top",newStack.getTop());
-        startActivity(nextIntent);
-        finish();
+        if(newStack.peek() == 4)
+        {
+            Intent nextIntent = new Intent(ContinuouslyCompoundedActivity.this, ListDataActivity.class);
+            nextIntent.putExtra("type", formulaType);
+            nextIntent.putExtra("intArr", stackArr);
+            nextIntent.putExtra("top", newStack.getTop());
+            startActivity(nextIntent);
+            finish();
+        } else if(newStack.peek() == 100) {
+            Intent nextIntent = new Intent(ContinuouslyCompoundedActivity.this, MainMenuActivity.class);
+            nextIntent.putExtra("type", formulaType);
+            nextIntent.putExtra("intArr", stackArr);
+            nextIntent.putExtra("top", newStack.getTop());
+            startActivity(nextIntent);
+            finish();
+        }
     }
 
     public void AddData(String fileName, int yearsToGrow,

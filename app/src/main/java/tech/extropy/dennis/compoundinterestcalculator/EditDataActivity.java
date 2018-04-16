@@ -84,7 +84,7 @@ public class EditDataActivity extends AppCompatActivity {
         newStack.pop();
         int formulaType;
         formulaType = 0;
-        
+
         Intent intent = new Intent(this, ListDataActivity.class);
         intent.putExtra("type", formulaType);
         intent.putExtra("intArr",stackArr);
