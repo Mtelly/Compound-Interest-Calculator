@@ -12,7 +12,11 @@ import android.util.Log;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
+//TEST
+    public static DatabaseHelper instance;
+    public static Context context;
+    public SQLiteDatabase db;
+//END TEST
     private static final String TAG = "DatabaseHelper";
     private static final String TABLE_NAME = "interest_table";
     private static final String COL1 = "ID";
@@ -28,6 +32,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         //Factory is SQLiteDatabase.CursorFactory
         super(context, TABLE_NAME, null, 1);
+//TEST
+        // Init the singleton
+        if (instance == null){
+            instance = this;
+            instance.context = context;
+            instance.db = instance.getWritableDatabase();
+        }
+//END TEST
     }
 
     //When the table is created for the first time.
@@ -36,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //CREATE TABLE people_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, YearsToGrow TEXT)
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
-                COL7 + " INT,"+COL8+" INT,"+COL9+" TEXT)";
+                COL7 + " INT, "+COL8+" INT, "+COL9+" TEXT)";
 
         //execSQL: Execute a single SQL statement
         //that is NOT a SELECT or any other SQL statement that returns data.
@@ -215,6 +227,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteName: Deleting " + name + " from database.");
         db.execSQL(query);
     }
+//TEST
+    public static void closeDatabase(){
+        instance.db.close();
+        instance = null;
+    }
 
-
+    public static void deleteDatabase(Context context){
+        context.deleteDatabase(TABLE_NAME);
+    }
+//END TEST
 }

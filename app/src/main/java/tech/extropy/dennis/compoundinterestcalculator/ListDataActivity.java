@@ -113,6 +113,15 @@ public class ListDataActivity extends AppCompatActivity {
             //then add it to the ArrayList
             listData.add(data.getString(1));
         }
+//TEST
+        //get the data and append to a list
+        Cursor data2 = mDatabaseHelper.getData();
+        //while (data2.moveToNext()) {
+            //get the value from the database in column 1
+            //then add it to the ArrayList
+          //  Log.d("class_type54789",""+data2.getString(8));//It should display class type!
+        //}
+//END TEST
         //create the list adapter and set the adapter
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);

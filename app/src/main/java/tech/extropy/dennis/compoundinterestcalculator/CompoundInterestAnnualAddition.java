@@ -110,6 +110,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                         TestPrintDatabase();
+                        //deleteDatabase();
                         checkValidation = false;
                         strInput = mYearsGrowInput.getText().toString();
                         if(isEmpty(strInput)){
@@ -233,6 +234,11 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
             }
         });
+    }
+
+    public void deleteDatabase() {
+        mDatabaseHelper.deleteDatabase(this);
+        mDatabaseHelper.closeDatabase();
     }
 
     @Override
