@@ -116,11 +116,11 @@ public class ListDataActivity extends AppCompatActivity {
 //TEST
         //get the data and append to a list
         Cursor data2 = mDatabaseHelper.getData();
-        //while (data2.moveToNext()) {
+        while (data2.moveToNext()) {
             //get the value from the database in column 1
             //then add it to the ArrayList
-          //  Log.d("class_type54789",""+data2.getString(8));//It should display class type!
-        //}
+           Log.d("class_type54789",""+data2.getString(8));//It should display class type!
+        }
 //END TEST
         //create the list adapter and set the adapter
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
@@ -139,7 +139,6 @@ public class ListDataActivity extends AppCompatActivity {
                     itemID = data.getInt(0);
                 }
                 displayWindow(name, itemID);
-
             }
         });
     }
@@ -150,6 +149,10 @@ public class ListDataActivity extends AppCompatActivity {
         View promptsView = li.inflate(R.layout.custom2, null);
         final String name2 = name;
         final int itemID2 = itemID;
+
+        //Once window displays. It packs the intent.
+        //TODO: Move the method call, columnHandler within 'Delete' or 'Load'
+        columnHandler(name);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
 
@@ -175,11 +178,9 @@ public class ListDataActivity extends AppCompatActivity {
                                     newStack.push(10);
 
                                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
-
                                     editScreenIntent.putExtra("type", 5);
                                     editScreenIntent.putExtra("top", newStack.getTop());
                                     editScreenIntent.putExtra("intArr", stackArr);
-
                                     editScreenIntent.putExtra("id",itemID2);
                                     editScreenIntent.putExtra("name",name2);
                                     editScreenIntent.putExtra("type",10);
@@ -200,6 +201,7 @@ public class ListDataActivity extends AppCompatActivity {
                                 int top = intent.getIntExtra("top",9999);
                                 newStack.setTop(top);
 //Todo: I need to retrieve the table type from the database prior to class loading.
+//Look at new method, columnHandler.
                                 int formulaType = intent.getIntExtra("type",9999);
 
                                 if(newStack.peek() == 6) {
@@ -224,6 +226,15 @@ public class ListDataActivity extends AppCompatActivity {
         // show it
         alertDialog.show();
 
+    }
+
+    public void columnHandler(String name){
+        Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
+        int itemID = -1;
+        while(data.moveToNext()){
+            itemID = data.getInt(0);
+        }
+        Log.d("columnHandler3287",""+name);
     }
 
     /**
