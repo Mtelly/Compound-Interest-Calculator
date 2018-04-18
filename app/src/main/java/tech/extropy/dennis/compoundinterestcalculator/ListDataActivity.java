@@ -234,24 +234,37 @@ public class ListDataActivity extends AppCompatActivity {
     }
 
     public void columnHandler(String name){
+        Log.d("name :",""+name);
         Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
         int itemID = -1;
 
         while(data.moveToNext()){
-            itemID = data.getInt(0);
+            //itemID = data.getInt(0);
+            Log.d("List position123",""+data.getString(0));
+            intent.putExtra("listPosition",data.getString(0));
+
+           // Log.d("TABLE_NAME123",""+data.getString(1));
+           // intent.putExtra("TABLE_NAME",data.getString(1));
         }
         Log.d("columnHandler3287",""+itemID);
 
 //TODO: Start here.
 //TODO: Pack return these into an intent. Will be moved into next screen.
+//TODO: The loop below prints the log for the entire database.
         //get the data and append to a list
         Cursor data2 = mDatabaseHelper.getData();
         while (data2.moveToNext()) {
             //get the value from the database in column 1
             //then add it to the ArrayList
-            Log.d("UNKNOWN",""+data2.getString(0));
+            Log.d("List position",""+data2.getString(0));
+            intent.putExtra("listPosition",data2.getString(0));
+
             Log.d("TABLE_NAME",""+data2.getString(1));
+            intent.putExtra("TABLE_NAME",data2.getString(1));
+
             Log.d("columnH #ofTimesC",""+data2.getInt(2));
+            intent.putExtra("listPosition",data2.getInt(2));
+
             Log.d("columnH #ofTimesC",""+data2.getDouble(3));
             Log.d("columnH #ofTimesC",""+data2.getDouble(4));
             Log.d("columnH #ofTimesC",""+data2.getDouble(5));
@@ -259,6 +272,7 @@ public class ListDataActivity extends AppCompatActivity {
             Log.d("columnH additions",""+data2.getInt(7));
             Log.d("columnH class_type :",""+data2.getString(8));//It should display class type!
         }
+
     }
     /*"CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
