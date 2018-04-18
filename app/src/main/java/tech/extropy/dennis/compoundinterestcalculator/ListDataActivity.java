@@ -237,16 +237,16 @@ public class ListDataActivity extends AppCompatActivity {
         Log.d("name :",""+name);
         Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
         int itemID = -1;
+        int selectedPosition = 0;
 
         while(data.moveToNext()){
             //itemID = data.getInt(0);
             Log.d("List position123",""+data.getString(0));
             intent.putExtra("listPosition",data.getString(0));
-
+            selectedPosition = Integer.parseInt(data.getString(0));
            // Log.d("TABLE_NAME123",""+data.getString(1));
            // intent.putExtra("TABLE_NAME",data.getString(1));
         }
-        Log.d("columnHandler3287",""+itemID);
 
 //TODO: Start here.
 //TODO: Pack return these into an intent. Will be moved into next screen.
@@ -256,21 +256,23 @@ public class ListDataActivity extends AppCompatActivity {
         while (data2.moveToNext()) {
             //get the value from the database in column 1
             //then add it to the ArrayList
-            Log.d("List position",""+data2.getString(0));
-            intent.putExtra("listPosition",data2.getString(0));
+            if(selectedPosition == Integer.parseInt(data2.getString(0))) {
+                Log.d("List position", "" + data2.getString(0));
+                intent.putExtra("listPosition", data2.getString(0));
 
-            Log.d("TABLE_NAME",""+data2.getString(1));
-            intent.putExtra("TABLE_NAME",data2.getString(1));
+                Log.d("TABLE_NAME", "" + data2.getString(1));
+                intent.putExtra("TABLE_NAME", data2.getString(1));
 
-            Log.d("columnH #ofTimesC",""+data2.getInt(2));
-            intent.putExtra("listPosition",data2.getInt(2));
+                Log.d("columnH #ofTimesC", "" + data2.getInt(2));
+                intent.putExtra("listPosition", data2.getInt(2));
 
-            Log.d("columnH #ofTimesC",""+data2.getDouble(3));
-            Log.d("columnH #ofTimesC",""+data2.getDouble(4));
-            Log.d("columnH #ofTimesC",""+data2.getDouble(5));
-            Log.d("columnH #ofTimesC",""+data2.getInt(6));
-            Log.d("columnH additions",""+data2.getInt(7));
-            Log.d("columnH class_type :",""+data2.getString(8));//It should display class type!
+                Log.d("columnH #ofTimesC", "" + data2.getDouble(3));
+                Log.d("columnH #ofTimesC", "" + data2.getDouble(4));
+                Log.d("columnH #ofTimesC", "" + data2.getDouble(5));
+                Log.d("columnH #ofTimesC", "" + data2.getInt(6));
+                Log.d("columnH additions", "" + data2.getInt(7));
+                Log.d("columnH class_type :", "" + data2.getString(8));//It should display class type!
+            }
         }
 
     }
