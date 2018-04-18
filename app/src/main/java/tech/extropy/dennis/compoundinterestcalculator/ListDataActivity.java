@@ -113,6 +113,7 @@ public class ListDataActivity extends AppCompatActivity {
             //then add it to the ArrayList
             listData.add(data.getString(1));
         }
+
 //TEST
         //get the data and append to a list
         Cursor data2 = mDatabaseHelper.getData();
@@ -122,6 +123,7 @@ public class ListDataActivity extends AppCompatActivity {
            Log.d("class_type54789",""+data2.getString(8));//It should display class type!
         }
 //END TEST
+
         //create the list adapter and set the adapter
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);
@@ -143,7 +145,7 @@ public class ListDataActivity extends AppCompatActivity {
         });
     }
 
-    public void displayWindow(String name, int itemID) {
+    public void displayWindow(final String name, int itemID) {
 // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(context1);
         View promptsView = li.inflate(R.layout.custom2, null);
@@ -202,6 +204,9 @@ public class ListDataActivity extends AppCompatActivity {
                                 newStack.setTop(top);
 //Todo: I need to retrieve the table type from the database prior to class loading.
 //Look at new method, columnHandler.
+
+                                //columnHandler(name);
+
                                 int formulaType = intent.getIntExtra("type",9999);
 
                                 if(newStack.peek() == 6) {
@@ -231,11 +236,33 @@ public class ListDataActivity extends AppCompatActivity {
     public void columnHandler(String name){
         Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
         int itemID = -1;
+
         while(data.moveToNext()){
             itemID = data.getInt(0);
         }
-        Log.d("columnHandler3287",""+name);
+        Log.d("columnHandler3287",""+itemID);
+
+//TODO: Start here.
+//TODO: Pack return these into an intent. Will be moved into next screen.
+        //get the data and append to a list
+        Cursor data2 = mDatabaseHelper.getData();
+        while (data2.moveToNext()) {
+            //get the value from the database in column 1
+            //then add it to the ArrayList
+            Log.d("UNKNOWN",""+data2.getString(0));
+            Log.d("TABLE_NAME",""+data2.getString(1));
+            Log.d("columnH #ofTimesC",""+data2.getInt(2));
+            Log.d("columnH #ofTimesC",""+data2.getDouble(3));
+            Log.d("columnH #ofTimesC",""+data2.getDouble(4));
+            Log.d("columnH #ofTimesC",""+data2.getDouble(5));
+            Log.d("columnH #ofTimesC",""+data2.getInt(6));
+            Log.d("columnH additions",""+data2.getInt(7));
+            Log.d("columnH class_type :",""+data2.getString(8));//It should display class type!
+        }
     }
+    /*"CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL2 + " TEXT, " + COL3 + " INTEGER, " + COL4 + " REAL, " + COL5 + " REAL, " + COL6 + " REAL,"+
+                COL7 + " INT, "+COL8+" INT, "+COL9+" TEXT)";*/
 
     /**
      * customizable toast
