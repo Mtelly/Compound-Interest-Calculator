@@ -239,28 +239,31 @@ public class ListDataActivity extends AppCompatActivity {
         int selectedPosition = 0;
 
         while(data.moveToNext()){
-            //itemID = data.getInt(0);
             intent.putExtra("listPosition",data.getString(0));
             selectedPosition = Integer.parseInt(data.getString(0));
-           // Log.d("TABLE_NAME123",""+data.getString(1));
-           // intent.putExtra("TABLE_NAME",data.getString(1));
         }
 
-        //get the data and append to a list
         Cursor data2 = mDatabaseHelper.getData();
         while (data2.moveToNext()) {
-            //get the value from the database in column 1
-            //then add it to the ArrayList
             if(selectedPosition == Integer.parseInt(data2.getString(0))) {
                 intent.putExtra("listPosition", data2.getString(0));
+                Log.d("listPosition",""+data2.getString(0));
                 intent.putExtra("interest_table", data2.getString(1));
+                Log.d("interest_table",""+data2.getString(1));
                 intent.putExtra("years_to_grow", data2.getInt(2));
-                intent.putExtra("interest_rate", data2.getInt(3));
-                intent.putExtra("current_principle", data2.getInt(4));
-                intent.putExtra("annual_addition", data2.getInt(5));
+                Log.d("years_to_grow",""+data2.getInt(2));
+                intent.putExtra("interest_rate", data2.getDouble(3));
+                Log.d("interest_rate",""+data2.getDouble(3));
+                intent.putExtra("current_principle", data2.getDouble(4));
+                Log.d("current_principle",""+data2.getDouble(4));
+                intent.putExtra("annual_addition", data2.getDouble(5));
+                Log.d("annual_addition",""+data2.getDouble(5));
                 intent.putExtra("NumOfTimeCompAnnually", data2.getInt(6));
+                Log.d("NumOfTimeCompAnnually",""+data2.getInt(6));
                 intent.putExtra("make_add_end_or_start", data2.getInt(7));
-                intent.putExtra("class_type", data2.getInt(8));
+                Log.d("make_add_end_or_start",""+data2.getInt(7));
+                intent.putExtra("class_type", data2.getString(8));
+                Log.d("class_type",""+data2.getString(8));
             }
         }
     }

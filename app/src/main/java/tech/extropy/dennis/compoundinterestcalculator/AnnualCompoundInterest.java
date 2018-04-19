@@ -227,7 +227,8 @@ public class AnnualCompoundInterest extends AppCompatActivity {
     public void AddData(String fileName,int yearsToGrow, double interestRate,
                         double currentPrinciple, int numberOfTimesCompoundedCompute) {
 
-        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate, currentPrinciple, numberOfTimesCompoundedCompute);
+        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate,
+                currentPrinciple, numberOfTimesCompoundedCompute);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
