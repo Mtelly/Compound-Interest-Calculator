@@ -47,7 +47,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mYearsGrow = (TextView) findViewById(R.id.yearGrow);
         mInterestRate = (TextView) findViewById(R.id.interestRate);
         mCurrentPrinciple = (TextView) findViewById(R.id.currentPrinciple);
@@ -74,6 +73,12 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         final Context context1 = this;
         CharSequence text = "Hello toast!";
         int duration = Toast.LENGTH_SHORT;
+
+//TODO: put stack array intents from ListDataActivity
+        //User opened a saved file.
+        if(intent.getIntExtra("top",9999) == 4) {
+            unpackSavedData();
+        }
 
         if(mYearsGrowInput.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -109,8 +114,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                        TestPrintDatabase();
-                        //deleteDatabase();
                         checkValidation = false;
                         strInput = mYearsGrowInput.getText().toString();
                         if(isEmpty(strInput)){
@@ -234,6 +237,12 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
             }
         });
+
+    }
+
+    public void unpackSavedData()
+    {
+        Log.d("This is ","the new method.");
     }
 
     public void deleteDatabase() {
