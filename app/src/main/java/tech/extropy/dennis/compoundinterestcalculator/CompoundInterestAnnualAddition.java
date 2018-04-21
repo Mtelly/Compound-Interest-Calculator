@@ -76,7 +76,9 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
 //TODO: put stack array intents from ListDataActivity
         //User opened a saved file.
-        if(intent.getIntExtra("top",9999) == 4) {
+        Log.d("Get top",""+intent.getIntExtra("top",9999));
+        if(intent.getIntExtra("top",9999) == 4){
+            Log.d("Inside"," if");
             unpackSavedData();
         }
 
@@ -242,7 +244,33 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
     public void unpackSavedData()
     {
-        Log.d("This is ","the new method.");
+        int listPosition = intent.getIntExtra("listPosition", 9999);
+        Log.d("listPosition", ""+listPosition);
+        String interestTable = intent.getStringExtra("interest_table");
+        Log.d("interestTable", ""+interestTable);
+        int yearsToGrow = intent.getIntExtra("years_to_grow",9999);
+        Log.d("yearsToGrow", ""+yearsToGrow);
+        double interestRate = intent.getDoubleExtra("interest_rate",9999);
+        Log.d("interestRate", ""+interestRate);
+        double currentPrinciple = intent.getDoubleExtra("current_principle",9999);
+        Log.d("currentPrinciple", ""+currentPrinciple);
+        double annualAddition = intent.getDoubleExtra("annual_addition",9999);
+        Log.d("annualAddition", ""+annualAddition);
+        int numOfTimeCompAnnually = intent.getIntExtra("NumOfTimeCompAnnually",9999);
+        Log.d("numOfTimeCompAnnually", ""+numOfTimeCompAnnually);
+        int endOrStartInt = intent.getIntExtra("make_add_end_or_start",9999);
+        Log.d("endOrStart", ""+endOrStartInt);
+        boolean endOrStart;
+
+        if(endOrStartInt == 1)
+        {
+            //End chosen
+            endOrStart = true;
+        } else {
+            //Start chosen
+            endOrStart = false;
+        }
+
     }
 
     public void deleteDatabase() {

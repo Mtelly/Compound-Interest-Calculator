@@ -152,10 +152,6 @@ public class ListDataActivity extends AppCompatActivity {
         final String name2 = name;
         final int itemID2 = itemID;
 
-        //Once window displays. It packs the intent.
-        //TODO: Move the method call, columnHandler within 'Delete' or 'Load'
-        columnHandler(name);
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
 
         // set prompts.xml to alertdialog builder
@@ -204,9 +200,7 @@ public class ListDataActivity extends AppCompatActivity {
                                 newStack.setTop(top);
 //Todo: I need to retrieve the table type from the database prior to class loading.
 //Look at new method, columnHandler.
-
-                                //columnHandler(name);
-
+                                columnHandler(name);
                                 int formulaType = intent.getIntExtra("type",9999);
 
                                 if(newStack.peek() == 6) {
@@ -214,10 +208,11 @@ public class ListDataActivity extends AppCompatActivity {
                                     intent.putExtra("type", formulaType);
                                     intent.putExtra("intArr",stackArr);
                                     intent.putExtra("top",newStack.getTop());
+                                    intent.putExtra("top",4);
                                     startActivity(intent);
                                     finish();
                                 }
-
+                                intent.putExtra("top",4);
                                 //View list of data
                                 Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
                                 startActivity(intent);
@@ -246,8 +241,8 @@ public class ListDataActivity extends AppCompatActivity {
         Cursor data2 = mDatabaseHelper.getData();
         while (data2.moveToNext()) {
             if(selectedPosition == Integer.parseInt(data2.getString(0))) {
-                intent.putExtra("listPosition", data2.getString(0));
-                Log.d("listPosition",""+data2.getString(0));
+                intent.putExtra("listPosition", data2.getInt(0));
+                Log.d("listPosition",""+data2.getInt(0));
                 intent.putExtra("interest_table", data2.getString(1));
                 Log.d("interest_table",""+data2.getString(1));
                 intent.putExtra("years_to_grow", data2.getInt(2));
@@ -262,6 +257,7 @@ public class ListDataActivity extends AppCompatActivity {
                 Log.d("NumOfTimeCompAnnually",""+data2.getInt(6));
                 intent.putExtra("make_add_end_or_start", data2.getInt(7));
                 Log.d("make_add_end_or_start",""+data2.getInt(7));
+
                 intent.putExtra("class_type", data2.getString(8));
                 Log.d("class_type",""+data2.getString(8));
             }
