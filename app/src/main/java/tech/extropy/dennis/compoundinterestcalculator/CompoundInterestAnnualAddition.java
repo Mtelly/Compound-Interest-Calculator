@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
 
+import static java.lang.Double.parseDouble;
+
 public class CompoundInterestAnnualAddition extends Activity { //extends AppCompatActivity {
     private static final String TAG = "MyActivity";
     TextView mYearsGrow, mInterestRate, mCurrentPrinciple, mAnnualAddition,
@@ -127,7 +129,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                             mInterestRateInput.setError("Input must not be empty.");
                             checkValidation = true;
                         } else {
-                            interestRate = Double.parseDouble(strInput);
+                            interestRate = parseDouble(strInput);
                             interestRate = interestRate * .01;
                         }
                         strInput = mCurrentPrincipleInput.getText().toString();
@@ -135,14 +137,15 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                             mCurrentPrincipleInput.setError("Input must not be empty.");
                             checkValidation = true;
                         } else {
-                            currentPrinciple = Double.parseDouble(strInput);
+                            currentPrinciple = parseDouble(strInput);
                         }
                         strInput = mAnnualAdditionInput.getText().toString();
                         if(isEmpty(strInput)){
                             mAnnualAdditionInput.setError("Input must not be empty.");
                             checkValidation = true;
                         } else {
-                            annualAddition = Integer.parseInt(strInput);
+                            //annualAddition = Integer.parseInt(strInput);
+                            annualAddition = Double.parseDouble(strInput);
                         }
                         strInput = mNumberOfTimesCompoundedInput.getText().toString();
                         if(isEmpty(mNumberOfTimesCompoundedInput.getText().toString())){
@@ -154,6 +157,12 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
                 if(checkValidation != true) {
                     if (startOrEnd == 1) {
+                        Log.d("CALCULATE", " BUTTON");
+                        Log.d("yearsToGrow",""+yearsToGrow);
+                        Log.d("interestRate",""+interestRate);
+                        Log.d("currentPrinciple",""+currentPrinciple);
+                        Log.d("annualAddition",""+annualAddition);
+                        Log.d("numberOfTimesCompounded",""+numberOfTimesCompounded);
                         total = finance.compoundInterestAnnualAdditionEnd(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
                     } else {
                         total = finance.compoundInterestAnnualAdditionBeginning(yearsToGrow, interestRate, currentPrinciple, annualAddition, numberOfTimesCompounded);
@@ -244,30 +253,34 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
     {
         int listPosition = intent.getIntExtra("listPosition", 9999);
         String interestTable = intent.getStringExtra("interest_table");
+
         int yearsToGrow = intent.getIntExtra("years_to_grow",9999);
         mYearsGrowInput.setText(String.valueOf(yearsToGrow),TextView.BufferType.EDITABLE);
-
         double interestRate = intent.getDoubleExtra("interest_rate",9999);
-        Log.d("interestRate", ""+interestRate);
+        //interestRate = interestRate * 100;
+        mInterestRateInput.setText(String.valueOf(interestRate*100),TextView.BufferType.EDITABLE);
         double currentPrinciple = intent.getDoubleExtra("current_principle",9999);
-        Log.d("currentPrinciple", ""+currentPrinciple);
+        mCurrentPrincipleInput.setText(String.valueOf(currentPrinciple),TextView.BufferType.EDITABLE);
         double annualAddition = intent.getDoubleExtra("annual_addition",9999);
-        Log.d("annualAddition", ""+annualAddition);
+        mAnnualAdditionInput.setText(String.valueOf(annualAddition),TextView.BufferType.EDITABLE);
         int numOfTimeCompAnnually = intent.getIntExtra("NumOfTimeCompAnnually",9999);
-        Log.d("numOfTimeCompAnnually", ""+numOfTimeCompAnnually);
+        mNumberOfTimesCompoundedInput.setText(String.valueOf(numOfTimeCompAnnually),TextView.BufferType.EDITABLE);
         int endOrStartInt = intent.getIntExtra("make_add_end_or_start",9999);
-        Log.d("endOrStart", ""+endOrStartInt);
-        boolean endOrStart;
+        Log.d("endOrStartInt",""+endOrStartInt);
 
-        if(endOrStartInt == 1)
+        if(endOrStartInt == 2)
         {
-            //End chosen
-            endOrStart = true;
-        } else {
             //Start chosen
-            endOrStart = false;
+            mRadioGroup.check(R.id.startRadioButton);
+            total = finance.compoundInterestAnnualAdditionBeginning(yearsToGrow, interestRate, currentPrinciple, annualAddition, numOfTimeCompAnnually);
+        } else {
+            //End chosen
+            mRadioGroup.check(R.id.endRadioButton);
+            total = finance.compoundInterestAnnualAdditionEnd(yearsToGrow, interestRate, currentPrinciple, annualAddition, numOfTimeCompAnnually);
+            Log.d("total end :",""+total);
         }
 
+        mTotal.setText("Total: " + "$" + df2.format(total));
     }
 
     public void deleteDatabase() {
