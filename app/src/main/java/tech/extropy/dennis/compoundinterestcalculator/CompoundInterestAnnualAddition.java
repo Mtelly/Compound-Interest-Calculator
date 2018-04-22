@@ -110,7 +110,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
 //TODO: put stack array intents from ListDataActivity
         //User opened a saved file.
-        if(intent.getIntExtra("top123",9999) == 4){
+        if(intent.getIntExtra("classLoaded",9999) == 6){
             unpackSavedData();
         }
 

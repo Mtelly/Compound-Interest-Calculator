@@ -35,7 +35,7 @@ public class ListDataActivity extends AppCompatActivity {
 
     private ListView mListView;
     final Context context1 = this;
-
+    String classType;
     Intent intent;
 
     @Override
@@ -198,27 +198,25 @@ public class ListDataActivity extends AppCompatActivity {
                                 newStack.setStackArr(stackArr);
                                 int top = intent.getIntExtra("top",9999);
                                 newStack.setTop(top);
+
 //Todo: I need to retrieve the table type from the database prior to class loading.
 //Look at new method, columnHandler.
 
                                 int formulaType = intent.getIntExtra("type",9999);
 
-                                if(newStack.peek() == 6) {
+                                columnHandler(name, intent);
+
+                                if(classType.compareTo("CompoundInterestAnnualAddition") == 0) {
                                     Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
+                                    newStack.push(6);
                                     intent.putExtra("type", formulaType);
                                     intent.putExtra("intArr",stackArr);
                                     intent.putExtra("top",newStack.getTop());
-                                    intent.putExtra("top",4);
+                                    intent.putExtra("classLoaded",newStack.peek());
+                                    columnHandler(name, intent);
                                     startActivity(intent);
                                     finish();
                                 }
-
-                                //View list of data
-                                Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
-                                columnHandler(name, intent);
-                                intent.putExtra("top123",4);
-                                startActivity(intent);
-                                finish();
                             }
                         });
 
@@ -261,6 +259,25 @@ public class ListDataActivity extends AppCompatActivity {
                 Log.d("make_add_end_or_start",""+data2.getInt(7));
 
                 intent.putExtra("class_type", data2.getString(8));
+                classType = data2.getString(8);
+                Log.d("class_type",""+data2.getString(8));
+            }
+        }
+    }
+
+    public void getClassType(String name){
+        Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
+        int itemID = -1;
+        int selectedPosition = 0;
+        while(data.moveToNext()){
+            intent.putExtra("listPosition",data.getString(0));
+            selectedPosition = Integer.parseInt(data.getString(0));
+        }
+        Cursor data2 = mDatabaseHelper.getData();
+        while (data2.moveToNext()) {
+            if(selectedPosition == Integer.parseInt(data2.getString(0))) {
+                intent.putExtra("class_type", data2.getString(8));
+                classType = data2.getString(8);
                 Log.d("class_type",""+data2.getString(8));
             }
         }
