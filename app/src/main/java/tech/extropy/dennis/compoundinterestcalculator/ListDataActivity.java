@@ -200,7 +200,7 @@ public class ListDataActivity extends AppCompatActivity {
                                 newStack.setTop(top);
 //Todo: I need to retrieve the table type from the database prior to class loading.
 //Look at new method, columnHandler.
-                                columnHandler(name);
+
                                 int formulaType = intent.getIntExtra("type",9999);
 
                                 if(newStack.peek() == 6) {
@@ -212,9 +212,11 @@ public class ListDataActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }
-                                intent.putExtra("top",4);
+
                                 //View list of data
                                 Intent intent = new Intent(ListDataActivity.this, CompoundInterestAnnualAddition.class);
+                                columnHandler(name, intent);
+                                intent.putExtra("top123",4);
                                 startActivity(intent);
                                 finish();
                             }
@@ -228,7 +230,7 @@ public class ListDataActivity extends AppCompatActivity {
 
     }
 
-    public void columnHandler(String name){
+    public void columnHandler(String name, Intent intent){
         Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
         int itemID = -1;
         int selectedPosition = 0;
