@@ -74,14 +74,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         CharSequence text = "Hello toast!";
         int duration = Toast.LENGTH_SHORT;
 
-//TODO: put stack array intents from ListDataActivity
-        //User opened a saved file.
-        Log.d("Get top",""+intent.getIntExtra("top123",9999));
-        if(intent.getIntExtra("top123",9999) == 4){
-            Log.d("Inside"," if");
-            unpackSavedData();
-        }
-
         if(mYearsGrowInput.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
@@ -113,6 +105,12 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
                 return false;
             }
         });
+
+//TODO: put stack array intents from ListDataActivity
+        //User opened a saved file.
+        if(intent.getIntExtra("top123",9999) == 4){
+            unpackSavedData();
+        }
 
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -245,11 +243,10 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
     public void unpackSavedData()
     {
         int listPosition = intent.getIntExtra("listPosition", 9999);
-        Log.d("listPosition", ""+listPosition);
         String interestTable = intent.getStringExtra("interest_table");
-        Log.d("interestTable", ""+interestTable);
         int yearsToGrow = intent.getIntExtra("years_to_grow",9999);
-        Log.d("yearsToGrow", ""+yearsToGrow);
+        mYearsGrowInput.setText(String.valueOf(yearsToGrow),TextView.BufferType.EDITABLE);
+
         double interestRate = intent.getDoubleExtra("interest_rate",9999);
         Log.d("interestRate", ""+interestRate);
         double currentPrinciple = intent.getDoubleExtra("current_principle",9999);
