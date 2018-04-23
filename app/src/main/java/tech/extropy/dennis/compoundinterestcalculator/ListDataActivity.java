@@ -238,6 +238,17 @@ public class ListDataActivity extends AppCompatActivity {
                                     columnHandler(name, intent);
                                     startActivity(intent);
                                     finish();
+                                } else if (classType.compareTo("ContinuouslyCompoundedActivity") == 0)
+                                {
+                                    Intent intent = new Intent(ListDataActivity.this, ContinuouslyCompoundedActivity.class);
+                                    newStack.push(3);
+                                    intent.putExtra("type", formulaType);
+                                    intent.putExtra("intArr",stackArr);
+                                    intent.putExtra("top",newStack.getTop());
+                                    intent.putExtra("classLoaded",newStack.peek());
+                                    columnHandler(name, intent);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }
                         });

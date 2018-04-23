@@ -90,6 +90,10 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
             }
         });
 
+        if(intent.getIntExtra("classLoaded",9999) == 3){
+            unpackSavedData();
+        }
+
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -198,6 +202,23 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void unpackSavedData()
+    {
+        int listPosition = intent.getIntExtra("listPosition", 9999);
+        String interestTable = intent.getStringExtra("interest_table");
+
+        int yearsToGrow = intent.getIntExtra("years_to_grow",9999);
+        mYearGrowInput.setText(String.valueOf(yearsToGrow),TextView.BufferType.EDITABLE);
+        double interestRate = intent.getDoubleExtra("interest_rate",9999);
+        //interestRate = interestRate * 100;
+        mInterestRateInput.setText(String.valueOf(interestRate*100),TextView.BufferType.EDITABLE);
+        double currentPrinciple = intent.getDoubleExtra("current_principle",9999);
+        mCurrentPrincipleInput.setText(String.valueOf(currentPrinciple),TextView.BufferType.EDITABLE);
+
+        total = finance.simpleInterest(currentPrinciple, interestRate, yearsToGrow);
+        mTotal.setText("Total: " + "$" + df2.format(total));
     }
 
     @Override
