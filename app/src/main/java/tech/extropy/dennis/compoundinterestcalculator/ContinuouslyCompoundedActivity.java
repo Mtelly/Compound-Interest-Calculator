@@ -230,7 +230,7 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
 
     public void AddData(String fileName, int yearsToGrow,
                         double interestRate, double currentPrinciple){
-        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate, currentPrinciple);
+        boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate, currentPrinciple, "ContinuouslyCompoundedActivity");
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

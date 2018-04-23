@@ -133,7 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //SimpleInterestActivity and ContinuouslyCompoundedActivity
     public boolean addData(String fileName, int yearsToGrow,
-                           double interestRate, double currentPrinciple) {
+                           double interestRate, double currentPrinciple, String classType) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -141,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL3, yearsToGrow);
         contentValues.put(COL4, interestRate);
         contentValues.put(COL5, currentPrinciple);
+        contentValues.put(COL9, classType);
 
         Log.d(TAG, "addData: Adding " + fileName + " to " + TABLE_NAME);
 
