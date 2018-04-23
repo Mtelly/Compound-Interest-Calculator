@@ -216,6 +216,17 @@ public class ListDataActivity extends AppCompatActivity {
                                     columnHandler(name, intent);
                                     startActivity(intent);
                                     finish();
+                                } else if (classType.compareTo("AnnualCompoundInterest") == 0)
+                                {
+                                    Intent intent = new Intent(ListDataActivity.this, AnnualCompoundInterest.class);
+                                    newStack.push(1);
+                                    intent.putExtra("type", formulaType);
+                                    intent.putExtra("intArr",stackArr);
+                                    intent.putExtra("top",newStack.getTop());
+                                    intent.putExtra("classLoaded",newStack.peek());
+                                    columnHandler(name, intent);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }
                         });

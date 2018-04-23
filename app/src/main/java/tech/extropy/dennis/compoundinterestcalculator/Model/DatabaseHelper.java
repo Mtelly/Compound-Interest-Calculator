@@ -100,9 +100,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //CompoundedInterestAnnualAddition
+    //AnnualCompoundInterest
     public boolean addData(String fileName,int yearsToGrow, double interestRate,
-                           double currentPrinciple, int numberOfTimesCompoundedCompute) {
+                           double currentPrinciple, int numberOfTimesCompoundedCompute,String classType) {
         /*Create and/or open a database that will be used for reading and writing.
         The first time this is called, the database will be opened and
         onCreate(SQLiteDatabase), onUpgrade(SQLiteDatabase, int, int) and/or onOpen(SQLiteDatabase)
@@ -118,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL4, interestRate);
         contentValues.put(COL5, currentPrinciple);
         contentValues.put(COL7, numberOfTimesCompoundedCompute);
+        contentValues.put(COL9, classType);
 
         //insert: Convenience method for inserting a row into the database.
         long result = db.insert(TABLE_NAME, null, contentValues);

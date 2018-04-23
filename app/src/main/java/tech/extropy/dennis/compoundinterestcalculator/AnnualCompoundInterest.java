@@ -89,6 +89,10 @@ public class AnnualCompoundInterest extends AppCompatActivity {
             }
         });
 
+        if(intent.getIntExtra("classLoaded",9999) == 1){
+            unpackSavedData();
+        }
+
         mCalculate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -228,13 +232,32 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                         double currentPrinciple, int numberOfTimesCompoundedCompute) {
 
         boolean insertData = mDatabaseHelper.addData(fileName, yearsToGrow, interestRate,
-                currentPrinciple, numberOfTimesCompoundedCompute);
+                currentPrinciple, numberOfTimesCompoundedCompute,"AnnualCompoundInterest");
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
         } else {
             toastMessage("Something went wrong");
         }
+    }
+
+    public void unpackSavedData()
+    {
+        int listPosition = intent.getIntExtra("listPosition", 9999);
+        String interestTable = intent.getStringExtra("interest_table");
+
+        int yearsToGrow = intent.getIntExtra("years_to_grow",9999);
+        mYearGrowInput.setText(String.valueOf(yearsToGrow), TextView.BufferType.EDITABLE);
+        double interestRate = intent.getDoubleExtra("interest_rate",9999);
+        mInterestRateInput.setText(String.valueOf(interestRate*100),TextView.BufferType.EDITABLE);
+        double currentPrinciple = intent.getDoubleExtra("current_principle",9999);
+        mCurrentPrincipleInput.setText(String.valueOf(currentPrinciple),TextView.BufferType.EDITABLE);
+        int numOfTimeCompAnnually = intent.getIntExtra("NumOfTimeCompAnnually",9999);
+        mNumberOfTimesCompoundedInput.setText(String.valueOf(numOfTimeCompAnnually),TextView.BufferType.EDITABLE);
+
+        total = finance.annualCompoundInterest(currentPrinciple, interestRate, yearsToGrow, numOfTimeCompAnnually);
+        Log.d("Total :",""+total);
+        mTotal.setText("Total: " + "$" + df2.format(total));
     }
 
     /**

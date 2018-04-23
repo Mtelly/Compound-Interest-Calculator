@@ -283,11 +283,6 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         mTotal.setText("Total: " + "$" + df2.format(total));
     }
 
-    public void deleteDatabase() {
-        mDatabaseHelper.deleteDatabase(this);
-        mDatabaseHelper.closeDatabase();
-    }
-
     @Override
     public void onBackPressed() {
         Stack newStack = new Stack();
@@ -351,13 +346,4 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
 
     }
 
-    /*This is test method to be deleted.*/
-    public void TestPrintDatabase(){
-        //TESTING
-        Cursor cursorTest = mDatabaseHelper.getData();
-        String[] columnNames = cursorTest.getColumnNames();
-        for(String x: columnNames) {
-            Log.d("columnName :", x);
-        }
-    }
 }
