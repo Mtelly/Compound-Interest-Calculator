@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -26,7 +28,7 @@ import java.text.DecimalFormat;
 
 import static java.lang.Double.parseDouble;
 
-public class CompoundInterestAnnualAddition extends Activity { //extends AppCompatActivity {
+public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends Activity { //
     private static final String TAG = "MyActivity";
     TextView mYearsGrow, mInterestRate, mCurrentPrinciple, mAnnualAddition,
             mNumberOfTimesCompounded, mTotal;
@@ -49,6 +51,11 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Compound Interest Annual Addition");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
+
         mYearsGrow = (TextView) findViewById(R.id.yearGrow);
         mInterestRate = (TextView) findViewById(R.id.interestRate);
         mCurrentPrinciple = (TextView) findViewById(R.id.currentPrinciple);
@@ -69,6 +76,7 @@ public class CompoundInterestAnnualAddition extends Activity { //extends AppComp
         intent = getIntent();
         checkValidation = false;
         mDatabaseHelper = new DatabaseHelper(this);
+
 
         mTotal.setText("Total: $0.00");
         final Context context = getApplicationContext();
