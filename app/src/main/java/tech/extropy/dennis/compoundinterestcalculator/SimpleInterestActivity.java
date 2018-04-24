@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,6 +42,11 @@ public class SimpleInterestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_interest);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Simple Interest");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
+
         mYearGrow = (TextView) findViewById(R.id.yearGrow);
         mInterestRate = (TextView) findViewById(R.id.interestRate);
         mCurrentPrinciple = (TextView) findViewById(R.id.currentPrinciple);

@@ -15,7 +15,7 @@
 
     <string name="compoundInterestWithAnnualAdd">Compound interest with annual additions</string>
     <string name="annual_comp_int">Annual Compound Interest</string>
-    <string name="simple_interest">Simple Interest Calculator</string>
+    <string name="simple_interest">Simple Interest</string>
     <string name="continuously_compound">Continuously Compounded Interest</string>
 
     <string name="continue_next">Continue</string>

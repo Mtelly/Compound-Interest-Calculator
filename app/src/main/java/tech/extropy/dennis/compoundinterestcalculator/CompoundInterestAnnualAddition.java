@@ -53,7 +53,7 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Compound Interest Annual Addition");
+        getSupportActionBar().setTitle("Compound Interest With Annual Additions");
         myToolbar.setTitleTextColor(0xFFFFFFFF);
 
         mYearsGrow = (TextView) findViewById(R.id.yearGrow);
