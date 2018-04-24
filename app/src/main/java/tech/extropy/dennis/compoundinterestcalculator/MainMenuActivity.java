@@ -1,10 +1,14 @@
 package tech.extropy.dennis.compoundinterestcalculator;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
@@ -21,6 +25,10 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Compound Interest Calculator");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
 
         radioGroup = (RadioGroup) findViewById(R.id.calculateGroup);
         continueNext = (Button) findViewById(R.id.continue_next);
