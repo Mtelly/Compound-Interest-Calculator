@@ -25,6 +25,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
 
 import static java.lang.Double.parseDouble;
 
@@ -41,7 +43,11 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
     double interestRate, currentPrinciple, annualAddition, total;
     int numberOfTimesCompounded, startOrEnd;
     String strInput;
+
     private DecimalFormat df2;
+    private NumberFormat nf1;
+    private Currency c1;
+
     boolean checkValidation;
     Intent intent;
     Bundle bd;
@@ -73,6 +79,12 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         df2 = new DecimalFormat(".##");
         finance = new FinanceMath();
+
+        nf1 = NumberFormat.getInstance();
+        nf1.setMaximumFractionDigits(2);
+        c1 = Currency.getInstance("USD");
+        nf1.setCurrency(c1);
+
         intent = getIntent();
         checkValidation = false;
         mDatabaseHelper = new DatabaseHelper(this);
@@ -177,7 +189,8 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
                     }
 
                     Log.d("Test", "Total amount: " + df2.format(total));
-                    mTotal.setText("Total: " + "$" + df2.format(total));
+                    String totalDisplay = "Total: " + "$" + nf1.format(total);
+                    mTotal.setText(totalDisplay);
                 }
             }
         });

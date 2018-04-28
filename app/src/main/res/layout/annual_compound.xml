@@ -26,8 +26,8 @@
         android:id="@+id/yearGrowInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/interestRateInput"
         android:layout_below="@+id/my_toolbar"
-        android:layout_toEndOf="@+id/total"
         android:ems="10"
         android:imeOptions="actionNext"
         android:inputType="numberSigned"
@@ -118,15 +118,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/numberOfTimesCompounded"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:id="@+id/include3" />
 
     <TextView
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numberOfTimesCompounded"
-        android:layout_marginTop="110dp"
-        android:layout_toStartOf="@+id/numberOfTimesCompoundedInput"
+        android:layout_below="@+id/include3"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/numberOfTimesCompounded"
         android:text="@string/total" />
 <!--
     <Button
