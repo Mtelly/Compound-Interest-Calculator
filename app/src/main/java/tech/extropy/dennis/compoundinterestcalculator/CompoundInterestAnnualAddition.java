@@ -301,7 +301,8 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
             Log.d("total end :",""+total);
         }
 
-        mTotal.setText("Total: " + "$" + df2.format(total));
+        String totalDisplay = "Total: " + "$" + nf1.format(total);
+        mTotal.setText(totalDisplay);
     }
 
     @Override

@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
 
 import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
@@ -30,10 +32,12 @@ public class AnnualCompoundInterest extends AppCompatActivity {
     EditText mYearGrowInput, mInterestRateInput, mCurrentPrincipleInput, mNumberOfTimesCompoundedInput;
     Button mCalculate;
     FinanceMath finance;
-    DecimalFormat df2;
     String strInput;
     int numberOfTimesCompoundedCompute;
     int yearsToGrow;
+    private DecimalFormat df2;
+    private NumberFormat nf1;
+    private Currency c1;
     double interestRate;
     double currentPrinciple;
     double total;
@@ -64,6 +68,11 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         mCalculate = (Button) findViewById(R.id.calculate);
         mSave = (Button) findViewById(R.id.save);
         finance = new FinanceMath();
+        nf1 = NumberFormat.getInstance();
+        nf1.setMaximumFractionDigits(2);
+        c1 = Currency.getInstance("USD");
+        nf1.setCurrency(c1);
+
         checkValidation = false;
         intent = getIntent();
         mDatabaseHelper = new DatabaseHelper(this);
@@ -136,8 +145,9 @@ public class AnnualCompoundInterest extends AppCompatActivity {
                 //strInput = mNumberOfTimesCompoundedInput.getText().toString();
                 if(checkValidation != true) {
                     total = finance.annualCompoundInterest(currentPrinciple, interestRate, yearsToGrow, numberOfTimesCompoundedCompute);
-                    Log.d("Total :", "" + total);
-                    mTotal.setText("Total: " + "$" + df2.format(total));
+                    Log.d("Test", "Total amount: " + df2.format(total));
+                    String totalDisplay = "Total: " + "$" + nf1.format(total);
+                    mTotal.setText(totalDisplay);
                 }
 
             }});
@@ -262,8 +272,8 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         mNumberOfTimesCompoundedInput.setText(String.valueOf(numOfTimeCompAnnually),TextView.BufferType.EDITABLE);
 
         total = finance.annualCompoundInterest(currentPrinciple, interestRate, yearsToGrow, numOfTimeCompAnnually);
-        Log.d("Total :",""+total);
-        mTotal.setText("Total: " + "$" + df2.format(total));
+        String totalDisplay = "Total: " + "$" + nf1.format(total);
+        mTotal.setText(totalDisplay);
     }
 
     /**
