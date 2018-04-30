@@ -204,10 +204,6 @@ public class ListDataActivity extends AppCompatActivity {
                                 newStack.setStackArr(stackArr);
                                 int top = intent.getIntExtra("top",9999);
                                 newStack.setTop(top);
-
-//Todo: I need to retrieve the table type from the database prior to class loading.
-//Look at new method, columnHandler.
-
                                 int formulaType = intent.getIntExtra("type",9999);
 
                                 columnHandler(name, intent);

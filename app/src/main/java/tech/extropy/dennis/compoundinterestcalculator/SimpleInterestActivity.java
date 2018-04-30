@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
 
 import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
 import tech.extropy.dennis.compoundinterestcalculator.Math.FinanceMath;
@@ -30,8 +32,10 @@ public class SimpleInterestActivity extends AppCompatActivity {
     Button mCalculate, mSave;
     TextView mTotal;
     FinanceMath finance;
-    DecimalFormat df2;
     String strInput;
+    private DecimalFormat df2;
+    private NumberFormat nf1;
+    private Currency c1;
     int yearsToGrow;
     Intent intent;
     double interestRate, currentPrinciple, total;
@@ -58,11 +62,14 @@ public class SimpleInterestActivity extends AppCompatActivity {
         mCalculate = (Button) findViewById(R.id.calculate);
         mSave = (Button) findViewById(R.id.save);
         finance = new FinanceMath();
+        nf1 = NumberFormat.getInstance();
+        nf1.setMaximumFractionDigits(2);
+        nf1.setMinimumFractionDigits(2);
+        c1 = Currency.getInstance("USD");
+        nf1.setCurrency(c1);
         checkValidation = false;
         intent = getIntent();
         mDatabaseHelper = new DatabaseHelper(this);
-
-
         mTotal.setText("Total: $0.00");
         final Context context1 = this;
 
@@ -123,9 +130,10 @@ public class SimpleInterestActivity extends AppCompatActivity {
                     currentPrinciple = Double.parseDouble(strInput);
                 }
 
-                if(checkValidation != true) {
+                if(!checkValidation) {
                     total = finance.simpleInterest(currentPrinciple, interestRate, yearsToGrow);
-                    mTotal.setText("Total: " + "$" + df2.format(total));
+                    String totalDisplay = "Total: " + "$" + nf1.format(total);
+                    mTotal.setText(totalDisplay);
                 }
             }});
 // add button listener
@@ -214,7 +222,8 @@ public class SimpleInterestActivity extends AppCompatActivity {
         mCurrentPrincipleInput.setText(String.valueOf(currentPrinciple),TextView.BufferType.EDITABLE);
 
         total = finance.simpleInterest(currentPrinciple, interestRate, yearsToGrow);
-        mTotal.setText("Total: " + "$" + df2.format(total));
+        String totalDisplay = "Total: " + "$" + nf1.format(total);
+        mTotal.setText(totalDisplay);
     }
 
     @Override

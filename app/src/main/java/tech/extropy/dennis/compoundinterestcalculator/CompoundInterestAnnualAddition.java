@@ -82,6 +82,7 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
 
         nf1 = NumberFormat.getInstance();
         nf1.setMaximumFractionDigits(2);
+        nf1.setMinimumFractionDigits(2);
         c1 = Currency.getInstance("USD");
         nf1.setCurrency(c1);
 
@@ -128,8 +129,6 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
             }
         });
 
-//TODO: put stack array intents from ListDataActivity
-        //User opened a saved file.
         if(intent.getIntExtra("classLoaded",9999) == 6){
             unpackSavedData();
         }
@@ -175,7 +174,7 @@ public class CompoundInterestAnnualAddition extends AppCompatActivity {//extends
                             numberOfTimesCompounded = Integer.parseInt(strInput);
                         }
 
-                if(checkValidation != true) {
+                if(!checkValidation) {
                     if (startOrEnd == 1) {
                         Log.d("CALCULATE", " BUTTON");
                         Log.d("yearsToGrow",""+yearsToGrow);

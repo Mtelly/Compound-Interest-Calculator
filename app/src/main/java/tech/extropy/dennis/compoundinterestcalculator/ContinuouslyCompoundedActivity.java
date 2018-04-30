@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
 
 import tech.extropy.dennis.compoundinterestcalculator.Controller.Stack;
@@ -37,8 +39,10 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
     Button mSave;
     TextView mTotal;
     FinanceMath finance;
-    DecimalFormat df2;
     String strInput;
+    private DecimalFormat df2;
+    private NumberFormat nf1;
+    private Currency c1;
     int numberOfTimesCompoundedCompute;
     int yearsToGrow;
     Intent intent;
@@ -68,6 +72,13 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
         mCalculate = (Button) findViewById(R.id.calculate);
         mSave = (Button) findViewById(R.id.save);
         finance = new FinanceMath();
+
+        nf1 = NumberFormat.getInstance();
+        nf1.setMaximumFractionDigits(2);
+        nf1.setMinimumFractionDigits(2);
+        c1 = Currency.getInstance("USD");
+        nf1.setCurrency(c1);
+
         checkValidation = false;
         intent = getIntent();
         mDatabaseHelper = new DatabaseHelper(this);
@@ -133,9 +144,11 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
                 }
 
 
-                if(checkValidation != true) {
+                if(!checkValidation) {
                     total = finance.continuousInterest(currentPrinciple, interestRate, yearsToGrow);
-                    mTotal.setText("Total: " + "$" + df2.format(total));
+                    Log.d("Test", "Total amount: " + df2.format(total));
+                    String totalDisplay = "Total: " + "$" + nf1.format(total);
+                    mTotal.setText(totalDisplay);
                 }
             }});
 
@@ -224,7 +237,8 @@ public class ContinuouslyCompoundedActivity extends AppCompatActivity {
         mCurrentPrincipleInput.setText(String.valueOf(currentPrinciple),TextView.BufferType.EDITABLE);
 
         total = finance.simpleInterest(currentPrinciple, interestRate, yearsToGrow);
-        mTotal.setText("Total: " + "$" + df2.format(total));
+        String totalDisplay = "Total: " + "$" + nf1.format(total);
+        mTotal.setText(totalDisplay);
     }
 
     @Override

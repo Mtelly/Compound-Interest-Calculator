@@ -70,6 +70,7 @@ public class AnnualCompoundInterest extends AppCompatActivity {
         finance = new FinanceMath();
         nf1 = NumberFormat.getInstance();
         nf1.setMaximumFractionDigits(2);
+        nf1.setMinimumFractionDigits(2);
         c1 = Currency.getInstance("USD");
         nf1.setCurrency(c1);
 
