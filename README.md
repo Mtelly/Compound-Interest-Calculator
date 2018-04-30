@@ -1,5 +1,8 @@
 Compound Interest Calculator
 =======================
+
+![main menu](mainmenu.png "This is the main menu")
+
 Source code for the Android app Compound Interest Calculator.
 
 List of To-Dos can be found here:
