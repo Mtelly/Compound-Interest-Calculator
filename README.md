@@ -1,7 +1,9 @@
 Compound Interest Calculator
 =======================
 
-![main menu](mainmenu.png =250x250)
+![main menu](mainmenu.png)
+
+<img src="mainmenu.jpg" alt="mainmenu" style="width: 200px;"/>
 
 Source code for the Android app Compound Interest Calculator.
 
